@@ -1,0 +1,21 @@
+/* エディターに反映されるかを確認するためのテストCSS */
+
+body {
+    background-color: #ffe4e1 !important; /* 薄いピンク背景 */
+    font-family: "Courier New", monospace !important; /* フォント変更 */
+    font-size: 18px !important; /* 文字サイズアップ */
+    color: #333333 !important;
+}
+
+h1,
+h2,
+h3 {
+    color: #0066cc !important; /* 見出しの色を青系に */
+    border-bottom: 2px dashed #0066cc;
+}
+
+p::before {
+    content: "✔︎ ";
+    color: green;
+    font-weight: bold;
+}
