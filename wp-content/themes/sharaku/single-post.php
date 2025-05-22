@@ -1,6 +1,6 @@
 <?php get_header(); ?>
-    <h1>
-        <?php
+    <!-- <h1><?php the_title() ?></h1> -->
+        <!-- <?php
         // WordPressのループを開始
         if ( have_posts() ) :
             while ( have_posts() ) : the_post();
@@ -12,6 +12,5 @@
         else :
             echo '<p>投稿が見つかりませんでした。</p>';
         endif;
-        ?>
-    </h1>
+        ?> -->
 <?php wp_footer(); ?>

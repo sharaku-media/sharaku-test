@@ -1,5 +1,5 @@
-<?php get_header(); ?>
+<!-- <?php get_header(); ?> -->
 
 <!-- この中に書いていくmain -->
 
-<?php get_footer(); ?>
+<!-- <?php get_footer(); ?> -->
