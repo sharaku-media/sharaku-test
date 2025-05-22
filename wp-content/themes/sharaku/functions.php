@@ -7,7 +7,20 @@
 // }
 // add_action('after_setup_theme', 'my_editor_styles');
 
-// ✅ 投稿タイプのテンプレート構造（固定見出しブロックを使用）
+// 特定ページへのstyle
+function sharaku_enqueue_single_post_style() {
+  if (is_singular('post')) {
+    wp_enqueue_style(
+      'sharaku-single-post-style',
+      get_template_directory_uri() . '/styles/single-post.css',
+      [], // 依存関係
+      null // バージョン（キャッシュ対策したい場合は time() や '1.0' など）
+    );
+  }
+}
+add_action('wp_enqueue_scripts', 'sharaku_enqueue_single_post_style');
+
+// 投稿タイプのテンプレート構造（固定見出しブロックを使用）
 add_action('init', function () {
   $post_type = get_post_type_object('post');
   if ($post_type) {
