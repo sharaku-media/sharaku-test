@@ -1,0 +1,36 @@
+# WordPress core (除外しておくことでコアのバージョン管理を避ける)
+wp-admin/
+wp-includes/
+
+# セキュリティに関わるファイル
+wp-config.php
+.htaccess
+.env
+
+# アップロード・キャッシュ系（重くなりやすい）
+wp-content/uploads/
+wp-content/cache/
+wp-content/debug.log
+
+# wp-content 以下で自作テーマやプラグインは明示的に除外から外す
+wp-content/plugins/*
+!wp-content/plugins/your-plugin/
+
+wp-content/themes/*
+!wp-content/themes/sharaku/
+
+# OSやIDEの不要ファイル
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Node関係（フロントビルド用などで使っている場合）
+node_modules/
+dist/
+build/
+
+# その他ログや一時ファイル
+npm-debug.log
+yarn-debug.log
+yarn-error.log
