@@ -1,5 +1,5 @@
-<?php include get_template_directory() . '/parts/header.php'; ?>
-<main>
+<!-- <?php get_header(); ?> -->
+
 <!-- この中に書いていくmain -->
     <!-- body -->
     <div class="px-3">
@@ -49,3 +49,4 @@
 </main>
 <?php include get_template_directory() . '/parts/footer.php'; ?>
 
+<!-- <?php get_footer(); ?> -->
