@@ -4,20 +4,22 @@
 <?php include get_template_directory() . '/parts/header.php'; ?>
     <main>
         <div class="main-images">
-            <?php
-                global $post;
-                
-                // コンテンツから画像を抽出
-                $content = $post->post_content;
-                preg_match_all('/<img[^>]+>/i', $content, $matches);
-                
-                // 最初の4枚のみを表示
-                $images = array_slice($matches[0], 0, 4);
-                
-                foreach ($images as $image) {
-                    echo $image;
-                }
-            ?>
+            <div class="image-track">
+                <?php
+                    global $post;
+                    $content = $post->post_content;
+                    preg_match_all('/<img[^>]+>/i', $content, $matches);
+                    $images = array_slice($matches[0], 0, 4);
+                    foreach ($images as $image) {
+                        echo '<div class="slide">' . $image . '</div>';
+                    }
+                ?>
+            </div>
+            <div class="indicator">
+                <?php for ($i = 0; $i < count($images); $i++): ?>
+                    <span class="dot" data-index="<?= $i ?>"></span>
+                <?php endfor; ?>
+            </div>
         </div>
         <section class="post-content">
             <h1 class="post-title"><?php the_title() ?></h1>
