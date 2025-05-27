@@ -1,4 +1,3 @@
-
     <footer>
         <p>
             <small>

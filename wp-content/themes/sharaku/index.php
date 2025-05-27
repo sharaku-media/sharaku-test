@@ -1,5 +1,4 @@
-<!-- <?php get_header(); ?> -->
-
+<?php include get_template_directory() . '/parts/header.php'; ?>
 <!-- この中に書いていくmain -->
     <!-- body -->
     <div class="px-3">
