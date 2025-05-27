@@ -62,6 +62,7 @@
                     endif;
                 ?>
             </div>
+                
         </section>
     </main>
 <?php include get_template_directory() . '/parts/footer.php'; ?>
