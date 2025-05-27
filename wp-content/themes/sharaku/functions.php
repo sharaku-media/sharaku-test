@@ -24,12 +24,12 @@ add_action('init', function () {
   $post_type = get_post_type_object('post');
   if ($post_type) {
     $post_type->template = [
-
-      // 🖼 メイン画像ギャラリー（編集可能）
+      // main images max 4（ロックしない）
       ['core/gallery', [
         'columns' => 4,
         'align' => 'wide',
-        'lock' => false
+        'className' => 'main-gallery',
+        'lock' => false  // ギャラリーは編集可能
       ]],
 
       // 📍 アクセス
