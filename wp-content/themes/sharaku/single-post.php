@@ -61,7 +61,6 @@
                         echo '<p>投稿が見つかりませんでした。</p>';
                     endif;
                 ?>
-            </div>
                 
         </section>
     </main>
