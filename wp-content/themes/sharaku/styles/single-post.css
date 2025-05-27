@@ -66,34 +66,31 @@ h1 {
     }
 }
 
-.tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    padding: 12px 0 32px 24px;
-}
 /* main imagesより下 */
 
-.tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    padding: 12px 0 32px 0;
-}
+.post-content {
+    padding: 24px 16px 0;
+    .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        padding: 12px 0 32px 0;
+    }
 
-.tag-button {
-    min-width: 50px;
-    height: 25px;
-    padding: 0 4px; /* 左右の内部余白を追加 */
-    background-color: #151515;
-    color: #fafafa;
-    font-size: 14px;
-    text-align: center;
-    line-height: 25px;
-    border-radius: 4px;
-    white-space: nowrap; /* テキストの折り返しを防ぐ */
-}
+    .tag-button {
+        min-width: 50px;
+        height: 25px;
+        padding: 0 4px; /* 左右の内部余白を追加 */
+        background-color: #151515;
+        color: #fafafa;
+        font-size: 14px;
+        text-align: center;
+        line-height: 25px;
+        border-radius: 4px;
+        white-space: nowrap; /* テキストの折り返しを防ぐ */
+    }
 
-.fixed-heading {
-    font-size: 20px;
+    .fixed-heading {
+        font-size: 20px;
+    }
 }
