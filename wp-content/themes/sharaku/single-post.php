@@ -23,18 +23,19 @@
         </div>
         <section class="post-content">
             <h1 class="post-title"><?php the_title() ?></h1>
-                <div>
-                    <?php if( $tags ){
-                        echo '<ul class="tag-list">';
-                            foreach( $tags as $tag ){
-                                echo '<li>';
-                                echo '<p class="tag-button">' . esc_html( $tag->name ) . '</p>';
-                                echo '</li>';
-                            }
-                        echo '</ul>';
-                        } 
-                    ?>
-                </div>
+            <div>
+                <?php if( $tags ){
+                    echo '<ul class="tag-list">';
+                        foreach( $tags as $tag ){
+                            echo '<li>';
+                            echo '<p class="tag-button">' . esc_html( $tag->name ) . '</p>';
+                            echo '</li>';
+                        }
+                    echo '</ul>';
+                    } 
+                ?>
+            </div>
+            <div class="post-wrap">
                 <?php
                     // WordPressのループを開始
                     if ( have_posts() ) :
@@ -60,7 +61,7 @@
                         echo '<p>投稿が見つかりませんでした。</p>';
                     endif;
                 ?>
-                
+            </div>
         </section>
     </main>
 <?php include get_template_directory() . '/parts/footer.php'; ?>
