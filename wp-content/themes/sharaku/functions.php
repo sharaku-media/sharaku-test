@@ -1,35 +1,34 @@
 <?php
-// ✅ Gutenbergエディター用スタイルの適用
-// function my_editor_styles() {
-//   add_theme_support('editor-styles');
-//   add_editor_style('editor-style.css');
-//   add_theme_support('block-templates');
-// }
-// add_action('after_setup_theme', 'my_editor_styles');
-
 // 特定ページへのstyle
-function sharaku_enqueue_single_post_style() {
+function sharaku_enqueue_assets() {
   if (is_singular('post')) {
     wp_enqueue_style(
       'sharaku-single-post-style',
-      get_template_directory_uri() . '/styles/single-post.css',
-      [], // 依存関係
-      null // バージョン（キャッシュ対策したい場合は time() や '1.0' など）
+      get_template_directory_uri() . '/styles/single-post.css'
+    );
+
+    wp_enqueue_script(
+      'sharaku-slider-script',
+      get_template_directory_uri() . '/scripts/slider.js',
+      [],
+      null,
+      true
     );
   }
 }
-add_action('wp_enqueue_scripts', 'sharaku_enqueue_single_post_style');
+add_action('wp_enqueue_scripts', 'sharaku_enqueue_assets');
 
 // 投稿タイプのテンプレート構造（固定見出しブロックを使用）
 add_action('init', function () {
   $post_type = get_post_type_object('post');
   if ($post_type) {
     $post_type->template = [
-      // main images max 4
+      // main images max 4（ロックしない）
       ['core/gallery', [
         'columns' => 4,
         'align' => 'wide',
-        'className' => 'main-gallery'
+        'className' => 'main-gallery',
+        'lock' => false  // ギャラリーは編集可能
       ]],
       // access
       ['core/heading', [
