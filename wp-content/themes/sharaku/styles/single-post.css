@@ -2,10 +2,6 @@ h1 {
     font-size: 32px;
 }
 
-h3 {
-    font-size: 20px;
-}
-
 /* main image */
 .main-images {
     max-width: 450px;
@@ -15,6 +11,7 @@ h3 {
     position: relative;
     overflow: hidden;
     padding-top: 8px;
+
     .image-track {
         display: flex;
         width: 100%;
@@ -250,5 +247,9 @@ h3 {
                 }
             }
         }
+    }
+
+    .fixed-heading {
+        font-size: 20px;
     }
 }
