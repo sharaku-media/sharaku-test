@@ -69,7 +69,12 @@ h3 {
     }
 }
 
-/* main imagesより下 */
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 12px 0 32px 24px;
+}
 
 .post-content {
     max-width: calc(450px - 32px); /* パディングを考慮した最大幅 */
