@@ -250,6 +250,7 @@ h1 {
     position: relative;
     overflow: hidden;
     padding-top: 8px;
+
     .image-track {
         display: flex;
         width: 100%;
@@ -332,5 +333,9 @@ h1 {
         line-height: 25px;
         border-radius: 4px;
         white-space: nowrap; /* テキストの折り返しを防ぐ */
+    }
+
+    .fixed-heading {
+        font-size: 20px;
     }
 }
