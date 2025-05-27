@@ -1,5 +1,6 @@
 <?php
 // ✅ 投稿詳細ページでのみ CSS/JS を読み込む
+// 特定ページへのstyle
 function sharaku_enqueue_assets() {
   if (is_singular('post')) {
     wp_enqueue_style(
