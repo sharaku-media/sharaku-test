@@ -1,4 +1,4 @@
-<?php get_header(); ?>
+<?php include get_template_directory() . '/parts/header.php'; ?>
     <!-- <h1><?php the_title() ?></h1> -->
         <!-- <?php
         // WordPressのループを開始
@@ -13,4 +13,4 @@
             echo '<p>投稿が見つかりませんでした。</p>';
         endif;
         ?> -->
-<?php wp_footer(); ?>
+<?php include get_template_directory() . '/parts/footer.php'; ?>
