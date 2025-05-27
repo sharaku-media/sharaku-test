@@ -61,7 +61,7 @@
                         echo '<p>投稿が見つかりませんでした。</p>';
                     endif;
                 ?>
-                
+            </div>
         </section>
     </main>
 <?php include get_template_directory() . '/parts/footer.php'; ?>
