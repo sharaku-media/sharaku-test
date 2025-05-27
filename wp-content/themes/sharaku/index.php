@@ -1,5 +1,6 @@
-<!-- <?php get_header(); ?> -->
+<?php include get_template_directory() . '/parts/header.php'; ?>
+<main>
+    <!-- この中に書いていくmain -->
+</main>
+<?php include get_template_directory() . '/parts/footer.php'; ?>
 
-<!-- この中に書いていくmain -->
-
-<!-- <?php get_footer(); ?> -->
