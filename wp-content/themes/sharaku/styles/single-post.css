@@ -2,10 +2,6 @@ h1 {
     font-size: 32px;
 }
 
-h3 {
-    font-size: 20px;
-}
-
 /* main image */
 .main-images {
     max-width: 450px;
@@ -15,6 +11,7 @@ h3 {
     position: relative;
     overflow: hidden;
     padding-top: 8px;
+
     .image-track {
         display: flex;
         width: 100%;
@@ -97,5 +94,9 @@ h3 {
         line-height: 25px;
         border-radius: 4px;
         white-space: nowrap; /* テキストの折り返しを防ぐ */
+    }
+
+    .fixed-heading {
+        font-size: 20px;
     }
 }
