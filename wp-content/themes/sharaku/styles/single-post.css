@@ -240,8 +240,68 @@ h1 {
         }
     }
 }
-.post-title {
-    padding-top: 24px;
+
+/* main image */
+.main-images {
+    max-width: 450px;
+    width: 100%;
+    height: 280px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    padding-top: 8px;
+    .image-track {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        overflow-x: scroll;
+        overflow-y: hidden; /* ← これを追加 */
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        touch-action: pan-x; /* ← スマホで横スワイプのみ許可 */
+    }
+
+    .image-track::-webkit-scrollbar {
+        display: none;
+    }
+
+    .slide {
+        flex: 0 0 100%;
+        scroll-snap-align: start;
+    }
+
+    .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        background: #151515;
+    }
+
+    .indicator {
+        display: flex;
+        gap: 8px;
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(221, 221, 221, 0.8);
+        border-radius: 20px;
+        padding: 6px 6px;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background 0.4s;
+    }
+
+    .dot.active {
+        background: white;
+    }
 }
 
 .tag-list {
@@ -250,14 +310,27 @@ h1 {
     gap: 4px;
     padding: 12px 0 32px 24px;
 }
+/* main imagesより下 */
+.post-content {
+    padding: 24px 16px 0;
 
-.tag-button {
-    width: 50px;
-    height: 25px;
-    background-color: #151515;
-    color: #fafafa;
-    font-size: 14px;
-    text-align: center;
-    line-height: 25px;
-    border-radius: 4px;
+    .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        padding: 12px 0 32px 0;
+    }
+
+    .tag-button {
+        min-width: 50px;
+        height: 25px;
+        padding: 0 4px; /* 左右の内部余白を追加 */
+        background-color: #151515;
+        color: #fafafa;
+        font-size: 14px;
+        text-align: center;
+        line-height: 25px;
+        border-radius: 4px;
+        white-space: nowrap; /* テキストの折り返しを防ぐ */
+    }
 }
