@@ -34,79 +34,96 @@ add_action('init', function () {
 
       // 📍 アクセス
       ['core/group', [
-        'className' => 'section-access',
-        'template' => [
-          ['core/heading', [
-            'level' => 3,
-            'content' => 'アクセス',
-            'className' => 'fixed-heading heading-access'
-          ]],
-          ['core/paragraph', ['placeholder' => 'アクセス情報を入力']]
-        ]
+        'className' => 'block-section'
+      ], [
+        ['core/heading', [
+          'level' => 3,
+          'content' => 'アクセス',
+          'className' => 'fixed-heading'
+        ]],
+        ['core/paragraph', ['placeholder' => 'アクセス情報を入力', 'className' => 'paragraph-access']]
       ]],
 
       // 🚉 最寄り駅
       ['core/group', [
-        'className' => 'section-station',
-        'template' => [
-          ['core/heading', [
-            'level' => 3,
-            'content' => '最寄り駅',
-            'className' => 'fixed-heading heading-station'
-          ]],
-          ['core/paragraph', ['placeholder' => '最寄り駅情報を入力']],
-          ['core/embed', [
-            'providerNameSlug' => 'google-maps',
-            'className' => 'location-map'
-          ]]
-        ]
+        'className' => 'block-section'
+      ], [
+        ['core/heading', [
+          'level' => 3,
+          'content' => '最寄り駅',
+          'className' => 'fixed-heading'
+        ]],
+        ['core/group', [
+          'className' => 'station-options'
+        ], [
+          ['core/paragraph', ['content' => '電車', 'className' => 'label-train']],
+          ['core/paragraph', ['content' => 'バス', 'className' => 'label-bus']],
+          ['core/paragraph', ['content' => '徒歩', 'className' => 'label-walk']]
+        ]],
+        ['core/html', [
+          'content' => '<div class="location-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!..." width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>',
+          'className' => 'location-map-wrapper'
+        ]]
       ]],
 
       // 🗓 時期
       ['core/group', [
-        'className' => 'section-season',
-        'template' => [
-          ['core/heading', [
-            'level' => 3,
-            'content' => '時期',
-            'className' => 'fixed-heading heading-season'
-          ]],
-          ['core/paragraph', ['placeholder' => '例：3月下旬〜4月上旬']]
-        ]
+        'className' => 'block-section'
+      ], [
+        ['core/heading', [
+          'level' => 3,
+          'content' => '時期',
+          'className' => 'fixed-heading'
+        ]],
+        ['core/paragraph', ['placeholder' => '例：3月下旬〜4月上旬', 'className' => 'paragraph-season']]
       ]],
 
       // 🌟 おすすめポイント
       ['core/group', [
-        'className' => 'section-points',
-        'template' => [
-          ['core/heading', [
-            'level' => 3,
-            'content' => 'おすすめポイント',
-            'className' => 'fixed-heading heading-points'
-          ]],
+        'className' => 'block-section'
+      ], [
+        ['core/heading', [
+          'level' => 3,
+          'content' => 'おすすめポイント',
+          'className' => 'fixed-heading'
+        ]],
 
-          // 🔸 ポイント 1
+        // 🔸 ポイント 1
+        ['core/group', ['className' => 'point-group'], [
           ['core/image', ['className' => 'point-image']],
-          ['core/paragraph', ['placeholder' => 'ポイントのタイトル1', 'className' => 'point-title']],
-          ['core/paragraph', ['placeholder' => 'ポイントの説明', 'className' => 'point-description']],
+          ['core/group', ['className' => 'point-text-group'], [
+            ['core/paragraph', ['placeholder' => 'ポイントのタイトル1', 'className' => 'point-title']],
+            ['core/paragraph', ['placeholder' => 'ポイントの説明', 'className' => 'point-description']]
+          ]]
+        ]],
 
-          // 🔸 ポイント 2
+        // 🔸 ポイント 2
+        ['core/group', ['className' => 'point-group'], [
           ['core/image', ['className' => 'point-image']],
-          ['core/paragraph', ['placeholder' => 'ポイントのタイトル2', 'className' => 'point-title']],
-          ['core/paragraph', ['placeholder' => 'ポイントの説明', 'className' => 'point-description']],
+          ['core/group', ['className' => 'point-text-group'], [
+            ['core/paragraph', ['placeholder' => 'ポイントのタイトル2', 'className' => 'point-title']],
+            ['core/paragraph', ['placeholder' => 'ポイントの説明', 'className' => 'point-description']]
+          ]]
+        ]],
 
-          // 🔸 ポイント 3
+        // 🔸 ポイント 3
+        ['core/group', ['className' => 'point-group'], [
           ['core/image', ['className' => 'point-image']],
-          ['core/paragraph', ['placeholder' => 'ポイントのタイトル3', 'className' => 'point-title']],
-          ['core/paragraph', ['placeholder' => 'ポイントの説明', 'className' => 'point-description']],
+          ['core/group', ['className' => 'point-text-group'], [
+            ['core/paragraph', ['placeholder' => 'ポイントのタイトル3', 'className' => 'point-title']],
+            ['core/paragraph', ['placeholder' => 'ポイントの説明', 'className' => 'point-description']]
+          ]]
+        ]],
 
-          // 🔸 ポイント 4
+        // 🔸 ポイント 4
+        ['core/group', ['className' => 'point-group'], [
           ['core/image', ['className' => 'point-image']],
-          ['core/paragraph', ['placeholder' => 'ポイントのタイトル4', 'className' => 'point-title']],
-          ['core/paragraph', ['placeholder' => 'ポイントの説明', 'className' => 'point-description']]
-        ]
-      ]],
-
+          ['core/group', ['className' => 'point-text-group'], [
+            ['core/paragraph', ['placeholder' => 'ポイントのタイトル4', 'className' => 'point-title']],
+            ['core/paragraph', ['placeholder' => 'ポイントの説明', 'className' => 'point-description']]
+          ]]
+        ]]
+      ]]
     ];
     $post_type->template_lock = 'all';
   }
