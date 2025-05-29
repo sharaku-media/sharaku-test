@@ -69,12 +69,17 @@ h1 {
 /* main imagesより下 */
 
 .post-content {
+    max-width: calc(450px - 32px); /* パディングを考慮した最大幅 */
+    width: calc(100% - 32px); /* パディングを考慮した幅 */
+    margin: 0 auto;
     padding: 24px 16px 0;
+
+    /* tag style */
     .tag-list {
         display: flex;
         flex-wrap: wrap;
         gap: 4px;
-        padding: 12px 0 32px 0;
+        padding-top: 12px;
     }
 
     .tag-button {
@@ -90,7 +95,148 @@ h1 {
         white-space: nowrap; /* テキストの折り返しを防ぐ */
     }
 
-    .fixed-heading {
-        font-size: 20px;
+    /* post content */
+    .post-wrap {
+        p {
+            font-size: 14px;
+        }
+
+        .block-section {
+            padding: 32px 0;
+
+            &:not(:last-child) {
+                border-bottom: 1px solid rgba(119, 119, 119, 0.7);
+            }
+        }
+
+        .fixed-heading {
+            font-size: 20px;
+            padding-bottom: 12px;
+        }
+
+        .paragraph-access {
+            position: relative;
+            padding-left: 24px;
+            /* margin-bottom: 24px; */
+            line-height: 1.6;
+        }
+
+        .paragraph-access:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            background: url("https://sharaku-photo.sakura.ne.jp/wp-content/themes/sharaku/images/pin-icon.svg")
+                no-repeat center;
+        }
+
+        .label-train:empty::before,
+        .label-bus:empty::before,
+        .label-walk:empty::before {
+            display: none;
+        }
+
+        .label-train,
+        .label-bus,
+        .label-walk {
+            position: relative;
+            padding-left: 28px;
+            padding-bottom: 8px;
+        }
+
+        .label-train:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            background: url("https://sharaku-photo.sakura.ne.jp/wp-content/themes/sharaku/images/train.svg")
+                no-repeat center;
+        }
+
+        .label-bus:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            background: url("https://sharaku-photo.sakura.ne.jp/wp-content/themes/sharaku/images/bus.svg")
+                no-repeat center;
+        }
+
+        .label-walk:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            background: url("https://sharaku-photo.sakura.ne.jp/wp-content/themes/sharaku/images/walk.svg")
+                no-repeat center;
+        }
+
+        .location-map {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            padding-top: 56.25%; /* 16:9のアスペクト比 */
+            margin: 0 auto;
+            overflow: hidden; /* iframeのはみ出しを防ぐ */
+            border-radius: 12px;
+            margin-top: 12px;
+        }
+
+        .location-map iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100% !important; /* iframeの幅を強制的に100%に */
+            height: 100% !important; /* iframeの高さを強制的に100%に */
+            border: 0;
+        }
+
+        .point-group {
+            .wp-block-group__inner-container {
+                width: 100%;
+                max-width: 450px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                & figure {
+                    width: 100px;
+                    height: 100px;
+                    margin: 0 8px;
+                    position: relative;
+                    overflow: hidden;
+
+                    & img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: 8px;
+                    }
+                }
+
+                .point-text-group {
+                    width: calc(100% - 216px); /* 100px * 2 + 16px (margin) */
+                    height: 100%;
+                    & .wp-block-group__inner-container {
+                        width: 100%;
+                        max-width: 250px;
+                        height: 100%;
+                        padding: 0 8px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: flex-start;
+                    }
+                }
+            }
+        }
     }
 }
