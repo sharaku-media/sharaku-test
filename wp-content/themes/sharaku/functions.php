@@ -35,15 +35,14 @@ add_action('init', function () {
 
       // 📍 アクセス
       ['core/group', [
-        'className' => 'section-access',
-        'template' => [
-          ['core/heading', [
-            'level' => 3,
-            'content' => 'アクセス',
-            'className' => 'fixed-heading heading-access'
-          ]],
-          ['core/paragraph', ['placeholder' => 'アクセス情報を入力']]
-        ]
+        'className' => 'block-section'
+      ], [
+        ['core/heading', [
+          'level' => 3,
+          'content' => 'アクセス',
+          'className' => 'fixed-heading'
+        ]],
+        ['core/paragraph', ['placeholder' => 'アクセス情報を入力', 'className' => 'paragraph-access']]
       ]],
 
       // 🚉 最寄り駅
