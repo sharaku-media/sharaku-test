@@ -18,6 +18,8 @@ function sharaku_enqueue_assets() {
   }
 }
 add_action('wp_enqueue_scripts', 'sharaku_enqueue_assets');
+
+// index.jsをindex.phpでのみ読み込む
 function sharaku_enqueue_index_script() {
   if (is_front_page() || is_home()) {
     wp_enqueue_script(
