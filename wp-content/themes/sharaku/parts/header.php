@@ -12,6 +12,7 @@
     <!-- 共通 style -->
     <link rel="stylesheet" href="<?= get_template_directory_uri() ?>/styles/ress.css">
     <?php wp_head() ?>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
     <!-- ここの下にheaderを用意 -->
