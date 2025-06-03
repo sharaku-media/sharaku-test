@@ -17,6 +17,18 @@ function sharaku_enqueue_assets() {
   }
 }
 add_action('wp_enqueue_scripts', 'sharaku_enqueue_assets');
+function sharaku_enqueue_index_script() {
+  if (is_front_page() || is_home()) {
+    wp_enqueue_script(
+      'sharaku-index-script',
+      get_template_directory_uri() . '/scripts/index.js',
+      [],
+      null,
+      true
+    );
+  }
+}
+add_action('wp_enqueue_scripts', 'sharaku_enqueue_index_script');
 
 // 投稿タイプのテンプレート構造（固定見出しブロックを使用）
 add_action('init', function () {
