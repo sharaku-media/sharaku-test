@@ -18,8 +18,6 @@ function sharaku_enqueue_assets() {
 }
 add_action('wp_enqueue_scripts', 'sharaku_enqueue_assets');
 
-
-// ✅ 投稿タイプ「post」のテンプレート構造を定義
 add_action('init', function () {
   $post_type = get_post_type_object('post');
   if ($post_type) {
