@@ -4,9 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php bloginfo("title"); ?></title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- 全体共通style -->
     <link rel="stylesheet" href="<?= get_template_directory_uri() ?>/styles/index.css">
+    <?php get_header(); ?>
 </head>
 <body>
-    <?php get_header(); ?>
     <!-- ここの下にheaderを用意 -->
+    <!-- <Header /> -->
+        <div
+            class="flex items-center justify-between px-4 py-1 sticky top-0 bg-white z-10">
+            <a href="playground.html">
+                <h1 class="uppercase text-[32px] font-bold">sharaku</h1>
+            </a>
+            <div
+                class="w-[36px] aspect-square rounded-full border border-black flex items-center justify-center">
+                <span>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24">
+                        <g
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2">
+                            <path d="m21 21l-4.34-4.34" />
+                            <circle cx="11" cy="11" r="8" />
+                        </g>
+                    </svg>
+                </span>
+            </div>
+        </div>
