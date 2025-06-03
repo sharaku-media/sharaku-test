@@ -1,6 +1,5 @@
 <?php
-// ✅ 投稿詳細ページでのみ CSS/JS を読み込む
-// 特定ページへのstyle
+// ✅ 投稿詳細ページやトップページで必要な CSS/JS を読み込む
 function sharaku_enqueue_assets() {
   if (is_singular('post')) {
     wp_enqueue_style(
@@ -16,11 +15,7 @@ function sharaku_enqueue_assets() {
       true
     );
   }
-}
-add_action('wp_enqueue_scripts', 'sharaku_enqueue_assets');
 
-// index.jsをindex.phpでのみ読み込む
-function sharaku_enqueue_index_script() {
   if (is_front_page() || is_home()) {
     wp_enqueue_script(
       'sharaku-index-script',
@@ -31,7 +26,7 @@ function sharaku_enqueue_index_script() {
     );
   }
 }
-add_action('wp_enqueue_scripts', 'sharaku_enqueue_index_script');
+add_action('wp_enqueue_scripts', 'sharaku_enqueue_assets');
 
 // 投稿タイプのテンプレート構造（固定見出しブロックを使用）
 add_action('init', function () {

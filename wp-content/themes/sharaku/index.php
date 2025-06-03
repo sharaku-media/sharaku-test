@@ -47,5 +47,3 @@
     </div>
 </main>
 <?php include get_template_directory() . '/parts/footer.php'; ?>
-
-<!-- <?php get_footer(); ?> -->
