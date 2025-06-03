@@ -19,8 +19,21 @@ function sharaku_enqueue_assets() {
 }
 add_action('wp_enqueue_scripts', 'sharaku_enqueue_assets');
 
+// index.phpだけにindex.jsを読み込む
+function sharaku_enqueue_index_script() {
+  if (is_front_page() || is_home()) {
+    wp_enqueue_script(
+      'sharaku-index-script',
+      get_template_directory_uri() . '/scripts/index.js', // パスを変更してください
+      [],
+      null,
+      true
+    );
+  }
+}
+add_action('wp_enqueue_scripts', 'sharaku_enqueue_index_script');
 
-// ✅ 投稿タイプ「post」のテンプレート構造を定義
+// 投稿タイプのテンプレート構造（固定見出しブロックを使用）
 add_action('init', function () {
   $post_type = get_post_type_object('post');
   if ($post_type) {
