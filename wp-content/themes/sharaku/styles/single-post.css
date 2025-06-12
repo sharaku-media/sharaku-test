@@ -69,26 +69,12 @@ h3 {
     }
 }
 
-.tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    padding: 12px 0 32px 24px;
-}
 /* main imagesより下 */
 .post-content {
     max-width: calc(450px - 32px); /* パディングを考慮した最大幅 */
     width: calc(100% - 32px); /* パディングを考慮した幅 */
     margin: 0 auto;
     padding: 24px 16px 0;
-
-    /* tag style */
-    .tag-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 4px;
-        padding-top: 12px;
-    }
 
     /* tag style */
     .tag-list {
@@ -220,8 +206,9 @@ h3 {
                 width: 100%;
                 max-width: 450px;
                 display: flex;
-                justify-content: center;
+                justify-content: flex-start;
                 align-items: center;
+                padding-bottom: 12px;
 
                 & figure {
                     width: 100px;
@@ -252,6 +239,51 @@ h3 {
                         align-items: flex-start;
                     }
                 }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .single-post {
+        max-width: 1000px;
+        width: 100%;
+        height: 100svh;
+        margin: 50px auto 0;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        overflow: hidden;
+        overflow-y: hidden;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        .main-images {
+            max-width: 600px;
+            width: 100%;
+            height: 600px;
+            margin-right: 32px;
+            overflow-y: hidden;
+
+            .slide {
+                border-radius: 12px;
+                overflow: hidden;
+            }
+        }
+
+        .post-content {
+            max-width: 400px; /* パディングを考慮した最大幅 */
+            width: 100%; /* パディングを考慮した幅 */
+            height: 100svh;
+            padding: 24px 16px 100px;
+            overflow-y: auto;
+
+            .post-wrap {
+                height: 100svh;
             }
         }
     }
