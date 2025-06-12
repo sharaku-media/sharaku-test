@@ -18,7 +18,7 @@
     <!-- ここの下にheaderを用意 -->
     <!-- <Header /> -->
         <div
-            class="flex items-center justify-between px-4 py-1 sticky top-0 bg-white z-10">
+            class="flex items-center justify-between px-4 py-1 fixed top-0 left-0 w-full bg-white z-10">
             <a href="playground.html">
                 <h1 class="uppercase text-[32px] font-bold">sharaku</h1>
             </a>
