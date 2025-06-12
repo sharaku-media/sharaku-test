@@ -2,7 +2,7 @@
     $tags = get_the_tags();
 ?>
 <?php include get_template_directory() . '/parts/header.php'; ?>
-    <main>
+    <main class="single-post">
         <div class="main-images">
             <div class="image-track">
                 <?php
