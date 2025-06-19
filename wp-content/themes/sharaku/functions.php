@@ -30,6 +30,35 @@ add_action('wp_enqueue_scripts', 'sharaku_enqueue_assets');
 
 // 投稿タイプのテンプレート構造（固定見出しブロックを使用）
 add_action('init', function () {
+  // 投稿に緯度・経度のカスタムフィールドを追加
+  function add_lat_lng_meta_box() {
+    add_meta_box(
+      'lat_lng_meta_box',
+      '位置情報（lat, lng）',
+      function ($post) {
+        $lat = get_post_meta($post->ID, 'lat', true);
+        $lng = get_post_meta($post->ID, 'lng', true);
+        echo '<label for="lat">緯度 (lat): </label>';
+        echo '<input type="text" name="lat" id="lat" value="' . esc_attr($lat) . '" size="25" /><br><br>';
+        echo '<label for="lng">経度 (lng): </label>';
+        echo '<input type="text" name="lng" id="lng" value="' . esc_attr($lng) . '" size="25" />';
+      },
+      'post',
+      'normal',
+      'default'
+    );
+  }
+  add_action('add_meta_boxes', 'add_lat_lng_meta_box');
+
+  function save_lat_lng_meta_box($post_id) {
+    if (array_key_exists('lat', $_POST)) {
+      update_post_meta($post_id, 'lat', sanitize_text_field($_POST['lat']));
+    }
+    if (array_key_exists('lng', $_POST)) {
+      update_post_meta($post_id, 'lng', sanitize_text_field($_POST['lng']));
+    }
+  }
+  add_action('save_post', 'save_lat_lng_meta_box');
   $post_type = get_post_type_object('post');
   if ($post_type) {
     $post_type->template = [
