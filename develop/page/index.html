@@ -82,7 +82,8 @@
 				</div>
 
 				<div class="location-view">
-					<div id="map"></div>
+					<!-- <div id="map"></div> -->
+					<div class="tagList"></div>
 					<!-- JS でコンテンツ情報を出す -->
 				</div>
 			</div>
@@ -109,10 +110,19 @@
 						<div class="location-item-tags-view">
 							<!-- JS でコンテンツを出す -->
 						</div>
-					</div>				
+					</div>
 				`;
 				locationView.appendChild(div);
 			});
+
+			// Render Tag on Desktop site
+			const tagList = document.querySelector(".tagList");
+			Array(8).fill(null).forEach(() => {
+				const tag = document.createElement("span");
+				tag.className = "location-item-tag";
+				tag.innerHTML = `夏🌻`;
+				locationItemTagsView.appendChild(tag);
+			})
 
 			// Render Location Item Tag
 			const locationItemTagsView = document.querySelector(
