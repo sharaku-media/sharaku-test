@@ -17,12 +17,28 @@ function sharaku_enqueue_assets() {
   }
 
   if (is_front_page() || is_home()) {
+    // まずスタイルシートを読み込む
+    wp_enqueue_style(
+        'sharaku-index-style',
+        get_template_directory_uri() . '/styles/index.css'
+    );
+
+    // まずindex.jsを読み込む
     wp_enqueue_script(
-      'sharaku-index-script',
-      get_template_directory_uri() . '/scripts/index.js',
-      [],
-      null,
-      true
+        'sharaku-index-script',
+        get_template_directory_uri() . '/scripts/index.js',
+        [], // 依存関係なし
+        null,
+        true
+    );
+
+    // その後にGoogle Maps APIを読み込む
+    wp_enqueue_script(
+        'google-maps',
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyCR_Nu28owuza4O4zP-LZUMMIelifwVP5g&callback=initMap',
+        ['sharaku-index-script'], // index.jsに依存
+        null,
+        true
     );
   }
 }
