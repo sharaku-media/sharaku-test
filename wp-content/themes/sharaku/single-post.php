@@ -2,10 +2,10 @@
     $tags = get_the_tags();
 ?>
 <?php include get_template_directory() . '/parts/header.php'; ?>
-    <main class="single-post">
-        <div class="main-images">
-            <div class="image-track">
-                <?php
+<main class="single-post">
+    <div class="main-images">
+        <div class="image-track">
+            <?php
                     global $post;
                     $content = $post->post_content;
                     preg_match_all('/<img[^>]+>/i', $content, $matches);
@@ -14,17 +14,17 @@
                         echo '<div class="slide">' . $image . '</div>';
                     }
                 ?>
-            </div>
-            <div class="indicator">
-                <?php for ($i = 0; $i < count($images); $i++): ?>
-                    <span class="dot" data-index="<?= $i ?>"></span>
-                <?php endfor; ?>
-            </div>
         </div>
-        <section class="post-content">
-            <h1 class="post-title"><?php the_title() ?></h1>
-            <div>
-                <?php if( $tags ){
+        <div class="indicator">
+            <?php for ($i = 0; $i < count($images); $i++): ?>
+            <span class="dot" data-index="<?= $i ?>"></span>
+            <?php endfor; ?>
+        </div>
+    </div>
+    <section class="post-content">
+        <h1 class="post-title"><?php the_title() ?></h1>
+        <div>
+            <?php if( $tags ){
                     echo '<ul class="tag-list">';
                         foreach( $tags as $tag ){
                             echo '<li>';
@@ -34,9 +34,9 @@
                     echo '</ul>';
                     } 
                 ?>
-            </div>
-            <div class="post-wrap">
-                <?php
+        </div>
+        <div class="post-wrap">
+            <?php
                     // WordPressのループを開始
                     if ( have_posts() ) :
                         while ( have_posts() ) : the_post();
@@ -61,7 +61,7 @@
                         echo '<p>投稿が見つかりませんでした。</p>';
                     endif;
                 ?>
-            </div>
-        </section>
-    </main>
+        </div>
+    </section>
+</main>
 <?php include get_template_directory() . '/parts/footer.php'; ?>
