@@ -8,9 +8,45 @@
     </div>
 
     <!-- LocationView -->
-    <div class="location-view-wrapper">
+    <div class="location-view-wrapper isOpening">
         <div class="search-wrapper">
-            <!-- ...existing search container code... -->
+            <!-- Close button -->
+            <span class="close-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
+                    <path fill="white"
+                        d="M8.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l3.3 3.3l-3.3 3.3c-.2.2-.3.4-.3.7c0 .6.4 1 1 1c.3 0 .5-.1.7-.3l4-4c.4-.4.4-1 0-1.4zM16 7c-.6 0-1 .4-1 1v8c0 .6.4 1 1 1s1-.4 1-1V8c0-.6-.4-1-1-1" />
+                </svg>
+            </span>
+
+            <div class="search-container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2">
+                        <path d="m21 21l-4.34-4.34" />
+                        <circle cx="11" cy="11" r="8" />
+                    </g>
+                </svg>
+                <input type="text" id="search-input" placeholder="検索" />
+                <button class="clear-search" style="display: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 56 56">
+                        <path fill="currentColor"
+                            d="M28 51.906c13.055 0 23.906-10.828 23.906-23.906c0-13.055-10.875-23.906-23.93-23.906C14.899 4.094 4.095 14.945 4.095 28c0 13.078 10.828 23.906 23.906 23.906m-8.414-13.5a1.99 1.99 0 0 1-1.992-1.992c0-.539.234-1.008.609-1.36l6.984-7.03l-6.984-7.032a1.8 1.8 0 0 1-.61-1.36c0-1.077.891-1.945 1.993-1.945c.539 0 1.008.211 1.36.586l7.03 7.008l7.079-7.031c.398-.422.82-.61 1.336-.61c1.101 0 1.992.891 1.992 1.97c0 .538-.188.984-.586 1.359l-7.031 7.054l7.007 6.985c.352.375.586.844.586 1.406a1.99 1.99 0 0 1-1.992 1.992a1.93 1.93 0 0 1-1.383-.586l-7.007-7.031l-6.985 7.031a1.93 1.93 0 0 1-1.406.586" />
+                    </svg>
+                </button>
+            </div>
+            <div class="tagList">
+                <?php
+                    // すべての投稿のタグを取得
+                    $tags = get_tags();
+                    if ($tags) :
+                        echo '<div class="tag-list">';
+                        foreach ($tags as $tag) : ?>
+                <span class="tag-button"><?php echo esc_html($tag->name); ?></span>
+                <?php endforeach;
+                        echo '</div>';
+                    endif;
+                ?>
+            </div>
         </div>
 
         <div class="location-view">
@@ -52,11 +88,13 @@
                             <?php
                                 $tags = get_the_tags();
                                 if ($tags) :
+                                    echo '<div class="tag-list">';
                                     foreach ($tags as $tag) : ?>
-                            <span class="location-item-tag"><?php echo $tag->name; ?></span>
+                            <span class="tag-button"><?php echo esc_html($tag->name); ?></span>
                             <?php endforeach;
-                                endif;
-                                ?>
+                                        echo '</div>';
+                                    endif;
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -66,7 +104,7 @@
                 wp_reset_postdata();
             endif;
             ?>
-      div/div>
+        </div>
     </div>
 </main>
 
