@@ -6,15 +6,19 @@ const selectedIcon = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
 
 function initMap() {
     // デフォルトの中心位置（大阪）
-    const defaultCenter = { lat: 34.6937, lng: 135.5023 };
+    const osakaCenter = {
+        lat: 34.6937,
+        lng: 135.5023,
+    };
 
     // 地図の初期化
     map = new google.maps.Map(document.getElementById("map"), {
-        center:
-            locations.length > 0
-                ? { lat: parseFloat(locations[0].lat), lng: parseFloat(locations[0].lng) }
-                : defaultCenter,
-        zoom: 13,
+        center: osakaCenter,
+        // center:
+        //     locations.length > 0
+        //         ? { lat: parseFloat(locations[0].lat), lng: parseFloat(locations[0].lng) }
+        //         : osakaCenter,
+        zoom: 10,
         styles: [
             {
                 featureType: "poi",
@@ -22,6 +26,10 @@ function initMap() {
                 stylers: [{ visibility: "off" }],
             },
         ],
+        // 追加の地図オプション
+        mapTypeControl: false, // 地図タイプの切り替えを非表示
+        streetViewControl: false, // ストリートビューを非表示
+        fullscreenControl: false, // 全画面表示ボタンを非表示
     });
 
     const infoWindow = new google.maps.InfoWindow();
@@ -63,3 +71,53 @@ function initMap() {
 
 // 地図の初期化を実行
 window.initMap = initMap;
+
+// // パネル開閉機能
+// Close Btn
+const locationViewWrapper = document.querySelector(".location-view-wrapper");
+
+const closeBtn = document.querySelector(".close-btn");
+closeBtn.addEventListener("click", () => {
+    if (locationViewWrapper.classList.contains("isOpening")) {
+        locationViewWrapper.classList.remove("isOpening");
+        locationViewWrapper.classList.add("isClosing");
+    } else {
+        locationViewWrapper.classList.remove("isClosing");
+        locationViewWrapper.classList.add("isOpening");
+    }
+});
+// document.addEventListener("DOMContentLoaded", function () {
+//     const locationViewWrapper = document.querySelector(".location-view-wrapper");
+//     const closeBtn = document.querySelector(".close-btn");
+//     // 初期状態を設定
+//     locationViewWrapper.classList.remove("isClosing");
+
+//     if (closeBtn) {
+//         closeBtn.addEventListener("click", () => {
+//             locationViewWrapper.classList.toggle("isClosing");
+//         });
+//     }
+
+//     if (closeBtn) {
+//         closeBtn.addEventListener("click", () => {
+//             if (locationViewWrapper.classList.contains("isOpening")) {
+//                 locationViewWrapper.classList.remove("isOpening");
+//                 locationViewWrapper.classList.add("isClosing");
+//             } else {
+//                 locationViewWrapper.classList.remove("isClosing");
+//                 locationViewWrapper.classList.add("isOpening");
+//             }
+//         });
+//     }
+
+//     // デスクトップ用のタグリスト表示
+//     const tagList = document.querySelector(".tagList");
+//     if (tagList) {
+//         const tags = ["観光", "神社", "公園", "カフェ"].forEach((tag) => {
+//             const span = document.createElement("span");
+//             span.className = "location-item-tag";
+//             span.textContent = tag;
+//             tagList.appendChild(span);
+//         });
+//     }
+// });
