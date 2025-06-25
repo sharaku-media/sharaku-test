@@ -76,27 +76,6 @@ h3 {
     margin: 0 auto;
     padding: 24px 16px 0;
 
-    /* tag style */
-    .tag-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 4px;
-        padding-top: 12px;
-    }
-
-    .tag-button {
-        min-width: 50px;
-        height: 25px;
-        padding: 0 4px; /* 左右の内部余白を追加 */
-        background-color: #151515;
-        color: #fafafa;
-        font-size: 14px;
-        text-align: center;
-        line-height: 25px;
-        border-radius: 4px;
-        white-space: nowrap; /* テキストの折り返しを防ぐ */
-    }
-
     /* post content */
     .post-wrap {
         p {
