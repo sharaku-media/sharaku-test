@@ -1,6 +1,21 @@
 <?php
 // ✅ 投稿詳細ページやトップページで必要な CSS/JS を読み込む
 function sharaku_enqueue_assets() {
+      // 共通のスタイルシートを読み込む（全ページ共通）
+    wp_enqueue_style(
+        'sharaku-style',
+        get_stylesheet_uri()  // style.cssを読み込む
+    );
+    // 共通のJavaScriptを読み込む（全ページ共通）
+  wp_enqueue_script(
+    'sharaku-common-script',
+    get_template_directory_uri() . '/scripts/common.js',
+    [],
+    null,
+    true
+  );
+
+  // 投稿詳細ページ用のアセット
   if (is_singular('post')) {
     wp_enqueue_style(
       'sharaku-single-post-style',
