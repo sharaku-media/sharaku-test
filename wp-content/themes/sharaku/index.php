@@ -38,11 +38,16 @@
                 <?php
                     // すべての投稿のタグを取得
                     $tags = get_tags();
+                    $season_tags = ['春', '夏', '秋', '冬'];
+                    
                     if ($tags) :
                         echo '<div class="tag-list">';
-                        foreach ($tags as $tag) : ?>
-                <span class="tag-button"><?php echo esc_html($tag->name); ?></span>
-                <?php endforeach;
+                        foreach ($tags as $tag) :
+                            $is_season = in_array($tag->name, $season_tags) ? ' data-season="'.esc_attr($tag->name).'"' : '';
+                    ?>
+                <span class="tag-button" <?php echo $is_season; ?>><?php echo esc_html($tag->name); ?></span>
+                <?php 
+                        endforeach;
                         echo '</div>';
                     endif;
                 ?>
@@ -86,14 +91,21 @@
                         <p class="location-item-address"><?php echo get_post_meta(get_the_ID(), 'address', true); ?></p>
                         <div class="location-item-tags-view">
                             <?php
+                                // すべての投稿のタグを取得
                                 $tags = get_the_tags();
+                                $season_tags = ['春', '夏', '秋', '冬'];
+                                
                                 if ($tags) :
-                                    echo '<div class="tag-list">';
-                                    foreach ($tags as $tag) : ?>
-                            <span class="tag-button"><?php echo esc_html($tag->name); ?></span>
-                            <?php endforeach;
-                                        echo '</div>';
-                                    endif;
+                                    echo '<div class="tag-list pc-tag-list">';
+                                    foreach ($tags as $tag) :
+                                        $is_season = in_array($tag->name, $season_tags) ? ' data-season="'.esc_attr($tag->name).'"' : '';
+                                ?>
+                            <span class="tag-button pc-tag-button"
+                                <?php echo $is_season; ?>><?php echo esc_html($tag->name); ?></span>
+                            <?php 
+                                    endforeach;
+                                    echo '</div>';
+                                endif;
                             ?>
                         </div>
                     </div>
