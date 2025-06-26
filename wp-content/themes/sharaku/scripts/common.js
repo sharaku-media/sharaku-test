@@ -26,17 +26,28 @@ document.addEventListener("DOMContentLoaded", function () {
                 tagElement.style.backgroundColor = seasonTags[tagText];
             }
 
-            // 削除イベントの追加
+            // タグクリックで削除する処理
             tagElement.addEventListener("click", () => {
+                // タグ要素を削除
                 tagElement.remove();
+                // 選択状態を解除
                 selectedTags = selectedTags.filter((tag) => tag !== tagText);
+                // タグボタンの選択状態も解除
+                const button = Array.from(document.querySelectorAll(".tag-button")).find(
+                    (btn) => btn.textContent.trim() === tagText
+                );
+                if (button) {
+                    button.classList.remove("selected");
+                }
                 updateSearchVisibility();
+                filterLocations();
             });
 
             // 検索バーの前にタグを挿入
             searchContainer.insertBefore(tagElement, searchInput);
             selectedTags.push(tagText);
             updateSearchVisibility();
+            filterLocations();
         }
     }
 
@@ -53,6 +64,46 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // 検索と絞り込みの関数
+    function filterLocations() {
+        const locationItems = document.querySelectorAll(".location-item");
+        const searchValue = searchInput.value.toLowerCase();
+
+        locationItems.forEach((item) => {
+            const title = item.querySelector(".location-item-title").textContent.toLowerCase();
+            const address = item.querySelector(".location-item-address").textContent.toLowerCase();
+            const tags = Array.from(
+                item.querySelectorAll(".location-item-tags-view .tag-button")
+            ).map((tag) => tag.textContent.toLowerCase());
+
+            // タグによる絞り込み
+            const hasSelectedTags =
+                selectedTags.length === 0 ||
+                selectedTags.every((selectedTag) => tags.includes(selectedTag.toLowerCase()));
+
+            // テキストによる絞り込み
+            const matchesSearch =
+                searchValue === "" ||
+                title.includes(searchValue) ||
+                address.includes(searchValue) ||
+                tags.some((tag) => tag.includes(searchValue));
+
+            // 表示/非表示の切り替え
+            const itemLink = item.closest(".location-item-link");
+            if (hasSelectedTags && matchesSearch) {
+                itemLink.style.display = "block";
+            } else {
+                itemLink.style.display = "none";
+            }
+        });
+    }
+
+    // 検索入力のイベントリスナー
+    searchInput.addEventListener("input", (e) => {
+        searchText = e.target.value;
+        filterLocations();
+    });
+
     // タグボタンの初期化とクリックイベント
     document.querySelectorAll(".tag-button").forEach((button) => {
         const tagText = button.textContent.trim();
@@ -66,14 +117,17 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             if (existingTag) {
+                // タグを削除
                 existingTag.remove();
                 selectedTags = selectedTags.filter((tag) => tag !== tagText);
                 this.classList.remove("selected");
             } else {
+                // タグを追加
                 addTagToSearchBar(tagText);
                 this.classList.add("selected");
             }
             updateSearchVisibility();
+            filterLocations();
         });
     });
 
@@ -87,5 +141,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".tag-button").forEach((button) => {
             button.classList.remove("selected");
         });
+        filterLocations();
     });
 });
