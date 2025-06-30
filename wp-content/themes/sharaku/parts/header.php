@@ -4,8 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php bloginfo("title"); ?></title>
+    <!-- SEO基本設定 -->
+    <title><?php wp_title('|', true, 'right'); bloginfo('name'); ?></title>
     <meta name="description" content="<?php bloginfo('description'); ?>">
+
+    <!-- OGP設定 -->
+    <meta property="og:title" content="<?php wp_title('|', true, 'right'); bloginfo('name'); ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<?php echo esc_url(home_url('/')); ?>">
+    <meta property="og:description" content="<?php bloginfo('description'); ?>">
+    <?php if (has_post_thumbnail()) : ?>
+    <meta property="og:image" content="<?php echo get_the_post_thumbnail_url(); ?>">
+    <?php endif; ?>
+
+    <!-- canonical URL -->
+    <link rel="canonical" href="<?php echo esc_url(get_permalink()); ?>">
+
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +34,7 @@
     <!-- ここの下にheaderを用意 -->
     <header class="mobile-header">
         <!-- logo -->
-        <h1 class="logo">SHARAKU</h1>
+        <h1 class="logo"><a href="<?= home_url('/') ?>">SHARAKU</a></h1>
 
         <!-- mobile search icon -->
         <!-- <button class="search-icon">
