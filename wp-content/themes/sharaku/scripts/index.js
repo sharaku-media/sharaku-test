@@ -35,7 +35,7 @@ function initMap() {
     const infoWindow = new google.maps.InfoWindow();
 
     // マーカーの作成
-    locations.forEach((location) => {
+    locations.forEach((location, index) => {
         const marker = new google.maps.Marker({
             position: {
                 lat: parseFloat(location.lat),
@@ -48,21 +48,43 @@ function initMap() {
 
         // マーカーのクリックイベント
         marker.addListener("click", () => {
-            infoWindow.setContent(`
-                <div style="padding: 10px;">
-                    <h3 style="margin-bottom: 8px;">${location.title}</h3>
-                    <img src="${location.image}" style="width: 150px; height: 100px; object-fit: cover; margin-bottom: 8px;">
-                    <p>${location.description}</p>
-                </div>
-            `);
-            infoWindow.open(map, marker);
-
             // マーカーのハイライト
             if (currentSelectedMarker) {
                 currentSelectedMarker.setIcon(defaultIcon);
             }
             marker.setIcon(selectedIcon);
             currentSelectedMarker = marker;
+
+            // 対応する投稿を表示
+            const locationItems = document.querySelectorAll(".location-item");
+            locationItems.forEach((item) => {
+                const itemLat = parseFloat(item.dataset.lat);
+                const itemLng = parseFloat(item.dataset.lng);
+
+                // 緯度経度が一致する投稿を表示
+                if (itemLat === location.lat && itemLng === location.lng) {
+                    // スクロール位置を調整
+                    const locationView = document.querySelector(".location-view");
+                    const itemOffset = item.offsetTop;
+                    locationView.scrollTo({
+                        top: itemOffset - 220,
+                        behavior: "smooth",
+                    });
+
+                    // ハイライト効果を追加
+                    item.classList.add("highlighted");
+                    setTimeout(() => {
+                        item.classList.remove("highlighted");
+                    }, 2000);
+                }
+            });
+
+            // パネルが閉じている場合は開く
+            const locationViewWrapper = document.querySelector(".location-view-wrapper");
+            if (locationViewWrapper.classList.contains("isClosing")) {
+                locationViewWrapper.classList.remove("isClosing");
+                locationViewWrapper.classList.add("isOpening");
+            }
         });
 
         markers.push(marker);
