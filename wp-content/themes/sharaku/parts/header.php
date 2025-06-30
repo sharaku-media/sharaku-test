@@ -32,6 +32,12 @@
 
 <body>
     <!-- ここの下にheaderを用意 -->
+    <!-- PCヘッダー -->
+    <!-- <header class="pc-header">
+        <h1 class="logo"><a href="<?= home_url('/') ?>">SHARAKU</a></h1>
+    </header> -->
+
+    <!-- モバイルヘッダー -->
     <header class="mobile-header">
         <!-- logo -->
         <h1 class="logo"><a href="<?= home_url('/') ?>">SHARAKU</a></h1>
