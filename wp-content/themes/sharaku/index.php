@@ -88,7 +88,6 @@
                     </div>
                     <div class="location-item-content">
                         <h2 class="location-item-title"><?php the_title(); ?></h2>
-                        <p class="location-item-address"><?php echo get_post_meta(get_the_ID(), 'address', true); ?></p>
                         <div class="location-item-tags-view">
                             <?php
                                 // すべての投稿のタグを取得
@@ -108,6 +107,18 @@
                                 endif;
                             ?>
                         </div>
+                        <?php
+                            // 投稿コンテンツから住所情報を取得
+                            $content = get_the_content();
+                            $address = '';
+                            
+                            // 'paragraph-access' クラスを持つ要素から住所を抽出
+                            if (preg_match('/<p[^>]*class="[^"]*paragraph-access[^"]*"[^>]*>(.*?)<\/p>/s', $content, $matches)) {
+                                $address = strip_tags($matches[1]);
+                            }
+                        ?>
+                        <p class="location-item-address"><?php echo esc_html($address); ?></p>
+
                     </div>
                 </div>
             </a>
