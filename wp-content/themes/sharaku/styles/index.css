@@ -147,7 +147,8 @@ main {
         color: #373737; /* テキストを暗めに */
     }
 
-    季節タグは既存の色を保持 .tag-button[data-season="春"] {
+    /* 季節タグは既存の色を保持  */
+    .tag-button[data-season="春"] {
         background-color: #41ca4d;
         color: #fafafa;
     }
