@@ -107,10 +107,10 @@ add_action('init', function () {
       ], [
         ['core/heading', [
           'level' => 3,
-          'content' => 'アクセス',
+          'content' => '住所',
           'className' => 'fixed-heading'
         ]],
-        ['core/paragraph', ['placeholder' => 'アクセス情報を入力', 'className' => 'paragraph-access']]
+        ['core/paragraph', ['placeholder' => '住所情報を入力', 'className' => 'paragraph-access']]
       ]],
 
       // 🚉 最寄り駅
