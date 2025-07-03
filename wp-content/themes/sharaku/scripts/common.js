@@ -109,6 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const tagText = button.textContent.trim();
         if (seasonTags[tagText]) {
             button.style.backgroundColor = seasonTags[tagText];
+            button.style.color = "#fafafa"; // 季節タグボタンの文字色も設定
         }
 
         button.addEventListener("click", function () {
