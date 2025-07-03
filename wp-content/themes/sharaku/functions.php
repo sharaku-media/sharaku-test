@@ -211,3 +211,6 @@ add_action('init', function () {
     $post_type->template_lock = 'all';
   }
 });
+
+remove_filter( 'the_content', 'wpautop' );
+remove_filter( 'the_excerpt', 'wpautop' );
