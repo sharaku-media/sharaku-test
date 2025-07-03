@@ -18,20 +18,6 @@ body {
     flex-direction: column;
 }
 
-/* Mobile header */
-.mobile-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 6px;
-    padding-inline: 10px;
-    padding-top: 10px;
-}
-
-.logo {
-    font-size: 28px;
-}
-
 .search-icon {
     padding: 4px;
     background: white;
