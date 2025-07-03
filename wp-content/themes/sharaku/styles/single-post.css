@@ -229,6 +229,35 @@ h3 {
     }
 }
 
+/* 季節タグは既存の色を保持  */
+.tag-button[data-season="春"] {
+    display: inline-block;
+    width: 50px;
+    background-color: #41ca4d;
+    color: #fafafa;
+}
+
+.tag-button[data-season="夏"] {
+    display: inline-block;
+    width: 50px;
+    background-color: #f65f55;
+    color: #fafafa;
+}
+
+.tag-button[data-season="秋"] {
+    display: inline-block;
+    width: 50px;
+    background-color: #ef7d30;
+    color: #fafafa;
+}
+
+.tag-button[data-season="冬"] {
+    display: inline-block;
+    width: 50px;
+    background-color: #5d8ef2;
+    color: #fafafa;
+}
+
 @media screen and (min-width: 768px) {
     .single-post {
         max-width: 1000px;
