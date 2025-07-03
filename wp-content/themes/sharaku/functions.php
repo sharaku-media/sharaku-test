@@ -119,7 +119,7 @@ add_action('init', function () {
       ], [
         ['core/heading', [
           'level' => 3,
-          'content' => '最寄り駅',
+          'content' => 'アクセス',
           'className' => 'fixed-heading'
         ]],
         ['core/group', [
