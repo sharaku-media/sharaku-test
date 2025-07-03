@@ -101,7 +101,7 @@ add_action('init', function () {
         'lock' => false
       ]],
 
-      // 📍 アクセス
+      // 📍 住所
       ['core/group', [
         'className' => 'block-section'
       ], [
@@ -144,6 +144,21 @@ add_action('init', function () {
           'className' => 'fixed-heading'
         ]],
         ['core/paragraph', ['placeholder' => '例：3月下旬〜4月上旬', 'className' => 'paragraph-season']]
+      ]],
+
+      // 詳細
+      ['core/group', [
+        'className' => 'block-section'
+      ], [
+        ['core/heading', [
+          'level' => 3,
+          'content' => '詳細',
+          'className' => 'fixed-heading'
+        ]],
+        ['core/paragraph', [
+          'placeholder' => 'ここに詳細情報を入力してください。',
+          'className' => 'paragraph-detail'
+        ]]
       ]],
 
       // 🌟 おすすめポイント
