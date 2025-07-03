@@ -122,14 +122,12 @@ h3 {
         }
 
         .label-train:empty::before,
-        .label-bus:empty::before,
-        .label-walk:empty::before {
+        .label-bus:empty::before {
             display: none;
         }
 
         .label-train,
-        .label-bus,
-        .label-walk {
+        .label-bus {
             position: relative;
             padding-left: 28px;
             padding-bottom: 8px;
@@ -157,7 +155,7 @@ h3 {
                 no-repeat center;
         }
 
-        .label-walk:before {
+        /* .label-walk:before {
             content: "";
             position: absolute;
             top: 0;
@@ -166,7 +164,7 @@ h3 {
             height: 24px;
             background: url("https://sharaku-photo.sakura.ne.jp/wp-content/themes/sharaku/images/walk.svg")
                 no-repeat center;
-        }
+        } */
 
         .location-map {
             position: relative;

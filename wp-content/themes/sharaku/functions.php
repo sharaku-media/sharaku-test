@@ -126,8 +126,7 @@ add_action('init', function () {
           'className' => 'station-options'
         ], [
           ['core/paragraph', ['content' => '電車', 'className' => 'label-train']],
-          ['core/paragraph', ['content' => 'バス', 'className' => 'label-bus']],
-          ['core/paragraph', ['content' => '徒歩', 'className' => 'label-walk']]
+          ['core/paragraph', ['content' => 'バス', 'className' => 'label-bus']]
         ]],
         ['core/html', [
           'content' => '<div class="location-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!..." width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>',
