@@ -14,10 +14,6 @@ function initMap() {
     // 地図の初期化
     map = new google.maps.Map(document.getElementById("map"), {
         center: osakaCenter,
-        // center:
-        //     locations.length > 0
-        //         ? { lat: parseFloat(locations[0].lat), lng: parseFloat(locations[0].lng) }
-        //         : osakaCenter,
         zoom: 10,
         styles: [
             {
@@ -108,38 +104,3 @@ closeBtn.addEventListener("click", () => {
         locationViewWrapper.classList.add("isOpening");
     }
 });
-// document.addEventListener("DOMContentLoaded", function () {
-//     const locationViewWrapper = document.querySelector(".location-view-wrapper");
-//     const closeBtn = document.querySelector(".close-btn");
-//     // 初期状態を設定
-//     locationViewWrapper.classList.remove("isClosing");
-
-//     if (closeBtn) {
-//         closeBtn.addEventListener("click", () => {
-//             locationViewWrapper.classList.toggle("isClosing");
-//         });
-//     }
-
-//     if (closeBtn) {
-//         closeBtn.addEventListener("click", () => {
-//             if (locationViewWrapper.classList.contains("isOpening")) {
-//                 locationViewWrapper.classList.remove("isOpening");
-//                 locationViewWrapper.classList.add("isClosing");
-//             } else {
-//                 locationViewWrapper.classList.remove("isClosing");
-//                 locationViewWrapper.classList.add("isOpening");
-//             }
-//         });
-//     }
-
-//     // デスクトップ用のタグリスト表示
-//     const tagList = document.querySelector(".tagList");
-//     if (tagList) {
-//         const tags = ["観光", "神社", "公園", "カフェ"].forEach((tag) => {
-//             const span = document.createElement("span");
-//             span.className = "location-item-tag";
-//             span.textContent = tag;
-//             tagList.appendChild(span);
-//         });
-//     }
-// });
