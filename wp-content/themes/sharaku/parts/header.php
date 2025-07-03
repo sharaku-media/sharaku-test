@@ -41,14 +41,22 @@
 <body>
     <!-- ここの下にheaderを用意 -->
     <!-- PCヘッダー -->
-    <!-- <header class="pc-header">
-        <h1 class="logo"><a href="<?= home_url('/') ?>">SHARAKU</a></h1>
-    </header> -->
+    <header class="pc-header">
+        <h1 class="logo">
+            <a href="<?= home_url('/') ?>">
+                <img src="<?= esc_url(get_template_directory_uri() . '/images/logo.svg') ?>" alt="SHARAKU">
+            </a>
+        </h1>
+    </header>
 
     <!-- モバイルヘッダー -->
     <header class="mobile-header">
         <!-- logo -->
-        <h1 class="logo"><a href="<?= home_url('/') ?>">SHARAKU</a></h1>
+        <h1 class="logo">
+            <a href="<?= home_url('/') ?>">
+                <img src="<?= esc_url(get_template_directory_uri() . '/images/logo.svg') ?>" alt="SHARAKU">
+            </a>
+        </h1>
 
         <!-- mobile search icon -->
         <!-- <button class="search-icon">
