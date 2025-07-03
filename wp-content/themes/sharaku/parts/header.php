@@ -8,6 +8,14 @@
     <title><?php wp_title('|', true, 'right'); bloginfo('name'); ?></title>
     <meta name="description" content="<?php bloginfo('description'); ?>">
 
+    <!-- SEO強化用キーワード -->
+    <meta name="keywords"
+        content="写真撮影スポット,フォトスポット,インスタ映え,桜,紅葉,夜景,風景写真,ポートレート撮影,カメラマン,写真教室,撮影地,絶景,季節の花,自然風景,都市風景,SHARAKU,sharaku,photo,sharaku-photo,シャラク,写真,撮影,スポット,ロケーション">
+
+    <!-- 地域キーワード -->
+    <meta name="geo.region" content="JP">
+    <meta name="geo.placename" content="日本,関西,大阪,兵庫,京都,奈良,和歌山,滋賀">
+
     <!-- OGP設定 -->
     <meta property="og:title" content="<?php wp_title('|', true, 'right'); bloginfo('name'); ?>">
     <meta property="og:type" content="website">
