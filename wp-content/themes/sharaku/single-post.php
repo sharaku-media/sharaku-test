@@ -33,15 +33,17 @@
         <h1 class="post-title"><?php the_title() ?></h1>
         <div>
             <?php if( $tags ){
-                    echo '<ul class="tag-list">';
-                        foreach( $tags as $tag ){
-                            echo '<li>';
-                            echo '<p class="tag-button">' . esc_html( $tag->name ) . '</p>';
-                            echo '</li>';
-                        }
-                    echo '</ul>';
-                    } 
-                ?>
+                echo '<ul class="tag-list">';
+                foreach( $tags as $tag ){
+                    $season_tags = ['春', '夏', '秋', '冬'];
+                    $is_season = in_array($tag->name, $season_tags) ? ' data-season="'.esc_attr($tag->name).'"' : '';
+                    echo '<li>';
+                    echo '<span class="tag-button"' . $is_season . '>' . esc_html( $tag->name ) . '</span>';
+                    echo '</li>';
+                }
+                echo '</ul>';
+            } 
+            ?>
         </div>
         <div class="post-wrap">
             <?php
