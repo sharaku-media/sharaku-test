@@ -184,7 +184,7 @@ main {
 
     .map-view {
         aspect-ratio: auto;
-        height: calc(100vh - 68px);
+        height: calc(100vh - 34px);
     }
 
     .location-view-wrapper {
