@@ -14,7 +14,7 @@ function initMap() {
     // 地図の初期化
     map = new google.maps.Map(document.getElementById("map"), {
         center: osakaCenter,
-        zoom: 10,
+        zoom: 11,
         styles: [
             {
                 featureType: "poi",
