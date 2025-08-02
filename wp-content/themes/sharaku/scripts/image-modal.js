@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let allImages = [];
     let currentImageIndex = 0;
 
-    // ページ内のすべての画像を取得し、クリック可能にする
+    // ページ内のすべての画像を取得し、拡大ボタンを追加
     function initializeImages() {
         // より包括的なセレクターで画像を取得
         const images = document.querySelectorAll(
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // 新しい画像のみを追加
         images.forEach((img, globalIndex) => {
             // 既に処理済みの画像はスキップ
-            if (img.classList.contains("clickable-image")) {
+            if (img.parentElement.classList.contains("image-container")) {
                 return;
             }
 
@@ -73,28 +73,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 console.log("処理中の画像:", imageSrc); // デバッグ用
 
+                // 画像をコンテナでラップ
+                const container = document.createElement("div");
+                container.className = "image-container";
+
+                // 画像の親要素に挿入
+                img.parentNode.insertBefore(container, img);
+                container.appendChild(img);
+
+                // 拡大ボタンを作成
+                const expandButton = document.createElement("button");
+                expandButton.className = "expand-button";
+                expandButton.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M9.5 13.09L10.91 14.5L6.41 19H10v2H3v-7h2v3.59zM10.91 9.5L9.5 10.91L5.91 7.5H10V5.5H3v7h2V8.91zM14.5 13.09L13.09 14.5L17.59 19H14v2h7v-7h-2v3.59zM13.09 9.5L14.5 10.91L18.09 7.5H14V5.5h7v7h-2V8.91z"/>
+                    </svg>
+                `;
+
                 // 新しい画像をallImagesに追加
                 const index = allImages.length;
                 allImages.push(img);
 
-                // クリック可能なスタイルを追加
+                // 拡大ボタンにクリックイベントを追加
+                expandButton.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log("拡大ボタンクリック:", img.src);
+                    openModal(index);
+                });
+
+                // コンテナに拡大ボタンを追加
+                container.appendChild(expandButton);
+
+                // 画像にクリック不可能なスタイルを追加
                 img.classList.add("clickable-image");
-
-                // クリックイベントを追加
-                img.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log("画像クリック:", img.src); // デバッグ用
-                    openModal(index);
-                });
-
-                // タッチデバイス用のタップイベント
-                img.addEventListener("touchend", function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log("画像タップ:", img.src); // デバッグ用
-                    openModal(index);
-                });
             };
 
             // 画像が読み込み完了している場合は即座に処理
