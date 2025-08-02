@@ -12,17 +12,34 @@
         </a>
     </div>
     <div class="main-images">
-        <div class="image-track">
-            <?php
-                    global $post;
-                    $content = $post->post_content;
-                    preg_match_all('/<img[^>]+>/i', $content, $matches);
-                    $images = array_slice($matches[0], 0, 4);
-                    foreach ($images as $image) {
-                        echo '<div class="slide">' . $image . '</div>';
-                    }
-                ?>
+        <div class="slider-container">
+            <!-- 前の画像ボタン -->
+            <button class="slider-arrow slider-arrow-prev" id="prevBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M15.41 7.41L14 6l-6 6l6 6l1.41-1.41L10.83 12z" />
+                </svg>
+            </button>
+
+            <div class="image-track" id="imageTrack">
+                <?php
+                        global $post;
+                        $content = $post->post_content;
+                        preg_match_all('/<img[^>]+>/i', $content, $matches);
+                        $images = array_slice($matches[0], 0, 4);
+                        foreach ($images as $image) {
+                            echo '<div class="slide">' . $image . '</div>';
+                        }
+                    ?>
+            </div>
+
+            <!-- 次の画像ボタン -->
+            <button class="slider-arrow slider-arrow-next" id="nextBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M8.59 16.59L10 18l6-6l-6-6l-1.41 1.41L13.17 12z" />
+                </svg>
+            </button>
         </div>
+
         <div class="indicator">
             <?php for ($i = 0; $i < count($images); $i++): ?>
             <span class="dot" data-index="<?= $i ?>"></span>
