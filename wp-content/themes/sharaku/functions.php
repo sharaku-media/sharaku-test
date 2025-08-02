@@ -29,6 +29,14 @@ function sharaku_enqueue_assets() {
       null,
       true
     );
+
+    wp_enqueue_script(
+      'sharaku-image-modal-script',
+      get_template_directory_uri() . '/scripts/image-modal.js',
+      [],
+      null,
+      true
+    );
   }
 
   if (is_front_page() || is_home()) {
