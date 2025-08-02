@@ -91,4 +91,31 @@
         </div>
     </section>
 </main>
+
+<!-- 画像拡大モーダル -->
+<div id="imageModal" class="image-modal">
+    <div class="image-modal-overlay" id="imageModalOverlay">
+        <div class="image-modal-content">
+            <button class="image-modal-close" id="imageModalClose">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+            </button>
+            <img id="modalImage" class="modal-image" src="" alt="">
+            
+            <!-- モーダル内でのナビゲーション（複数画像がある場合） -->
+            <button class="modal-nav modal-nav-prev" id="modalPrevBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M15.41 7.41L14 6l-6 6l6 6l1.41-1.41L10.83 12z"/>
+                </svg>
+            </button>
+            <button class="modal-nav modal-nav-next" id="modalNextBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M8.59 16.59L10 18l6-6l-6-6l-1.41 1.41L13.17 12z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
 <?php include get_template_directory() . '/parts/footer.php'; ?>
