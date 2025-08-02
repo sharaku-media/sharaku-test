@@ -62,6 +62,24 @@ add_action('wp_enqueue_scripts', 'sharaku_enqueue_assets');
 // WordPressのネイティブLazy Loadを有効化
 add_filter('wp_lazy_loading_enabled', '__return_true');
 
+// functions.php に追加
+function noindex_author_archive() {
+  if (is_author()) {
+    echo '<meta name="robots" content="noindex, follow">';
+  }
+}
+add_action('wp_head', 'noindex_author_archive');
+
+add_filter( 'author_rewrite_rules', '__return_empty_array' );
+function disable_author_archive() {
+  if( preg_match( '#/author/.+#', $_SERVER['REQUEST_URI'] ) ){
+    wp_redirect( esc_url( home_url( '/' ) ) );
+    exit;
+  }
+}
+add_action('init', 'disable_author_archive');
+
+
 // すべての画像にloading="lazy"属性を追加
 function add_lazy_loading_attribute($content) {
     if (!is_admin()) {
