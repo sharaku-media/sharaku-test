@@ -318,6 +318,153 @@ h3 {
     color: #fafafa;
 }
 
+/* 画像拡大モーダル */
+.image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-modal.active {
+    display: block;
+    opacity: 1;
+}
+
+.image-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.image-modal-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    cursor: default;
+}
+
+.modal-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 8px;
+}
+
+.image-modal-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: background 0.3s ease;
+}
+
+.image-modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.modal-nav:hover {
+    background: rgba(255, 255, 255, 0.3);
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.modal-nav-prev {
+    left: -70px;
+}
+
+.modal-nav-next {
+    right: -70px;
+}
+
+.modal-nav:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.modal-nav:disabled:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-50%) scale(1);
+}
+
+/* 画像をクリック可能にするスタイル */
+.clickable-image {
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.clickable-image:hover {
+    transform: scale(1.02);
+    opacity: 0.9;
+}
+
+/* モバイルでのタッチフィードバック */
+@media (max-width: 768px) {
+    .clickable-image:active {
+        transform: scale(0.98);
+    }
+
+    .modal-nav {
+        width: 60px;
+        height: 60px;
+    }
+
+    .modal-nav-prev {
+        left: -80px;
+    }
+
+    .modal-nav-next {
+        right: -80px;
+    }
+
+    .image-modal-close {
+        top: -60px;
+        width: 50px;
+        height: 50px;
+    }
+}
+
 @media screen and (min-width: 768px) {
     .pc-header {
         display: none !important;
