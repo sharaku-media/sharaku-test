@@ -28,7 +28,7 @@ h3 {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        z-index: 10;
+        z-index: 20; /* 拡大ボタンより上に */
         background: rgba(0, 0, 0, 0.5);
         border: none;
         border-radius: 50%;
@@ -91,6 +91,28 @@ h3 {
         height: 100%;
         object-fit: contain;
         background: #151515;
+    }
+
+    /* スライダー内の画像コンテナ */
+    .slide .image-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    .slide .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: #151515;
+    }
+
+    /* スライダー内の拡大ボタン */
+    .slide .expand-button {
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        z-index: 15;
     }
 
     .indicator {
@@ -244,7 +266,7 @@ h3 {
                 & figure {
                     /* width: 100%; */
                     max-width: 450px;
-                    height: 300px;
+                    /* height: 300px; */
                     margin: 0 8px;
                     position: relative;
                     overflow: hidden;
@@ -324,7 +346,7 @@ h3 {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100svh;
     z-index: 1000;
     display: none;
     opacity: 0;
@@ -341,8 +363,8 @@ h3 {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
+    height: 100svh;
+    background: rgba(15, 15, 15, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -429,20 +451,67 @@ h3 {
 }
 
 /* 画像をクリック可能にするスタイル */
-.clickable-image {
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.expand-button {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    color: white;
+    transition: all 0.3s ease;
+    z-index: 10;
+    opacity: 0.8;
+}
+
+.expand-button:hover {
+    background: rgba(0, 0, 0, 0.9);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.expand-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+.clickable-image {
+    cursor: default;
+    transition: none;
 }
 
 .clickable-image:hover {
-    transform: scale(1.02);
-    opacity: 0.9;
+    transform: none;
+    opacity: 1;
 }
 
 /* モバイルでのタッチフィードバック */
 @media (max-width: 768px) {
-    .clickable-image:active {
-        transform: scale(0.98);
+    .expand-button {
+        width: 36px;
+        height: 36px;
+        bottom: 6px;
+        right: 6px;
+    }
+
+    .expand-button svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .expand-button:active {
+        transform: scale(0.95);
     }
 
     .modal-nav {
