@@ -16,6 +16,55 @@ h3 {
     overflow: hidden;
     padding-top: 8px;
 
+    .slider-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .slider-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.5);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: none; /* モバイルでは非表示 */
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: white;
+    }
+
+    .slider-arrow:hover {
+        background: rgba(0, 0, 0, 0.7);
+        transform: translateY(-50%) scale(1.1);
+    }
+
+    .slider-arrow-prev {
+        left: 10px;
+    }
+
+    .slider-arrow-next {
+        right: 10px;
+    }
+
+    .slider-arrow:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+
+    .slider-arrow:disabled:hover {
+        background: rgba(0, 0, 0, 0.5);
+        transform: translateY(-50%) scale(1);
+    }
+
     .image-track {
         display: flex;
         width: 100%;
@@ -40,7 +89,7 @@ h3 {
     .slide img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
         background: #151515;
     }
 
@@ -195,7 +244,7 @@ h3 {
                 & figure {
                     /* width: 100%; */
                     max-width: 450px;
-                    height: 200px;
+                    height: 300px;
                     margin: 0 8px;
                     position: relative;
                     overflow: hidden;
@@ -204,6 +253,7 @@ h3 {
                         width: 100%;
                         height: 100%;
                         object-fit: cover;
+                        background-color: #151515;
                         border-radius: 8px;
                     }
                 }
@@ -216,7 +266,7 @@ h3 {
                         max-width: 450px;
                         height: 100%;
                         padding-left: 8px;
-                        padding-bottom: 16px;
+                        padding-bottom: 18px;
                         display: flex;
                         flex-direction: column;
                         justify-content: flex-start;
@@ -328,6 +378,10 @@ h3 {
             height: 600px;
             margin-right: 32px;
             padding-top: 24px;
+
+            .slider-arrow {
+                display: flex; /* PCでは表示 */
+            }
 
             .image-track {
                 height: 100%;
