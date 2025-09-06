@@ -1,4 +1,5 @@
 <?php include get_template_directory() . '/parts/header.php'; ?>
+<?php include get_template_directory() . '/parts/mobile-search.php'; ?>
 <!-- この中に書いていくmain -->
 <!-- body -->
 <main>
@@ -70,7 +71,7 @@
                     $lng = get_post_meta(get_the_ID(), 'lng', true);
                     ?>
             <a href="<?php the_permalink(); ?>" class="location-item-link">
-                <div class="location-item" data-lat="<?php echo esc_attr($lat); ?>"
+                <div class="location-item" data-lat="<?php echo esc_attr($lat); ?>" 
                     data-lng="<?php echo esc_attr($lng); ?>">
                     <div class="location-item-img-container">
                         <?php
@@ -135,7 +136,8 @@
 // 投稿データをJavaScriptで使用できるように変換
 const locations = [
     <?php
-    if ($posts_query->have_posts()) : while ($posts_query->have_posts()) : $posts_query->the_post();
+    if ($posts_query->have_posts()) : 
+        while ($posts_query->have_posts()) : $posts_query->the_post();
         $lat = get_post_meta(get_the_ID(), 'lat', true);
         $lng = get_post_meta(get_the_ID(), 'lng', true);
         ?> {
