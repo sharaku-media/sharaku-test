@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 *:focus {
@@ -12,8 +13,7 @@ button {
 }
 
 body {
-    height: calc(100vh - 20px);
-    overflow: hidden;
+    height: calc(100svh - 20px);
     display: flex;
     flex-direction: column;
 }
@@ -36,6 +36,25 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+}
+
+.search-icon:hover {
+    background: #f0f0f0;
+}
+
+/* モバイルでのみ表示 */
+@media (max-width: 599px) {
+    .mobile-header {
+        display: flex;
+    }
+}
+
+/* デスクトップでモバイルヘッダーを非表示 */
+@media (min-width: 600px) {
+    .mobile-header {
+        display: none !important;
+    }
 }
 
 /* Map view */
@@ -52,7 +71,6 @@ main {
     background: #d9d9d9;
     width: 100%;
     aspect-ratio: 2/3;
-    /* opacity: 0.2; */
     border-radius: 10px;
 }
 
@@ -67,14 +85,18 @@ main {
 }
 
 .location-view {
+    width: 100vw;
     display: flex;
     gap: 10px;
-    padding: 0 10px;
-    width: 100vw;
+    padding: 10px 10px 0;
     overflow-x: scroll;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
 }
 
 .location-item {
+    height: 300px;
+    position: relative;
     padding: 8px;
     background: #fefefe;
     border-radius: 16px;
@@ -82,10 +104,50 @@ main {
     flex-direction: column;
     gap: 8px;
     box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.08);
+    scroll-snap-align: center;
+    flex-shrink: 0;
+    border: none;
+    transition: all 0.3s ease-in-out;
+    box-sizing: border-box;
+}
+
+/* モバイル版のハイライト効果 - 線で表示 */
+.location-item.highlighted {
+    outline: solid 4px #ff4500;
+    outline-offset: -4px;
+    box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease-in-out;
+    animation: mobileLineIn 0.5s ease-in-out;
+}
+
+/* モバイル版のフェードアウトアニメーション */
+.location-item.highlighted.fade-out {
+    animation: mobileLineOut 0.5s ease-in-out forwards;
+}
+
+@keyframes mobileLineIn {
+    0% {
+        outline-color: transparent;
+        box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.08);
+    }
+    100% {
+        outline-color: #ff4500;
+        box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.08);
+    }
+}
+
+@keyframes mobileLineOut {
+    0% {
+        outline-color: #ff4500;
+        box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.08);
+    }
+    100% {
+        outline-color: transparent;
+        box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.08);
+    }
 }
 
 .location-item-img-container {
-    /* min-width: 180px; */
     width: 240px;
     max-width: 240px;
     height: 185px;
@@ -135,7 +197,306 @@ main {
     display: none;
 }
 
+/* モバイル検索オーバーレイ */
+.mobile-search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.mobile-search-overlay.active {
+    transform: translateX(0);
+}
+
+.mobile-search-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-search-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-bottom: 1px solid #e0e0e0;
+    background: white;
+}
+
+.mobile-search-back,
+.mobile-search-close {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+}
+
+.mobile-search-back:hover,
+.mobile-search-close:hover {
+    background: #f5f5f5;
+}
+
+.mobile-search-bar {
+    padding: 16px;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.mobile-search-input-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #f8f9fa;
+    border-radius: 25px;
+    padding: 12px 16px;
+    gap: 8px;
+    min-height: 48px;
+}
+
+.mobile-search-icon {
+    color: #666;
+    flex-shrink: 0;
+}
+
+.mobile-search-input-container input {
+    min-width: 0;
+    flex: 1;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 16px;
+    padding: 4px 0;
+}
+
+.mobile-clear-search {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-selected-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+}
+
+.mobile-selected-tag {
+    /* min-width: 30px;
+    height: 30px;
+    line-height: 30px; */
+    padding: 4px 8px;
+    font-size: 12px;
+    text-align: center;
+    color: #fefefe;
+    cursor: pointer;
+    border-radius: 4px;
+    background: #373737;
+    transition: all 0.2s;
+}
+
+.mobile-selected-tag[data-season="春"] {
+    background: #41ca4d;
+    color: #fefefe;
+    border-color: #41ca4d;
+}
+
+.mobile-selected-tag[data-season="夏"] {
+    background: #f65f55;
+    color: #fefefe;
+    border-color: #f65f55;
+}
+
+.mobile-selected-tag[data-season="秋"] {
+    background: #ef7d30;
+    color: #fefefe;
+    border-color: #ef7d30;
+}
+
+.mobile-selected-tag[data-season="冬"] {
+    background: #5d8ef2;
+    color: #fefefe;
+    border-color: #5d8ef2;
+}
+
+.mobile-tag-section {
+    padding: 16px;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.mobile-tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.mobile-tag-button {
+    background: #373737;
+    color: #fefefe;
+    border: none;
+    padding: 4px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* .mobile-tag-button:hover {
+    background: #e0e0e0;
+} */
+
+.mobile-tag-button.selected {
+    background: rgba(55, 55, 55, 0.8);
+    color: #fefefe;
+}
+
+.mobile-tag-button[data-season="春"] {
+    background: #41ca4d;
+    color: #fefefe;
+}
+
+.mobile-tag-button[data-season="夏"] {
+    background: #f65f55;
+    color: #fefefe;
+}
+
+.mobile-tag-button[data-season="秋"] {
+    background: #ef7d30;
+    color: #fefefe;
+}
+
+.mobile-tag-button[data-season="冬"] {
+    background: #5d8ef2;
+    color: #fefefe;
+}
+
+.mobile-search-results {
+    flex: 1;
+    overflow-y: auto;
+    background: white;
+    display: block; /* テスト用：常に表示 */
+}
+
+.mobile-search-results.show {
+    display: block; /* 検索時に表示 */
+}
+
+.mobile-results-container {
+    padding: 16px;
+}
+
+.mobile-result-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.mobile-result-item:hover {
+    background: #f9f9f9;
+}
+
+.mobile-result-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.mobile-result-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mobile-result-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.mobile-result-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    color: #333;
+    line-height: 1.3;
+}
+
+.mobile-result-address {
+    font-size: 14px;
+    color: #666;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+}
+
+.mobile-result-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.mobile-result-tag {
+    background: #373737;
+    color: #fefefe;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mobile-result-tag[data-season="春"] {
+    background: #41ca4d;
+    color: #fefefe;
+}
+
+.mobile-result-tag[data-season="夏"] {
+    background: #f65f55;
+    color: #fefefe;
+}
+
+.mobile-result-tag[data-season="秋"] {
+    background: #ef7d30;
+    color: #fefefe;
+}
+
+.mobile-result-tag[data-season="冬"] {
+    background: #5d8ef2;
+    color: #fefefe;
+}
+
 @media screen and (min-width: 600px) {
+    body {
+        height: 100vh;
+        overflow: hidden;
+    }
+    /* PC版では非表示 */
+    .mobile-search-overlay {
+        display: none;
+    }
+
     /* PC版のタグスタイル */
     .tag-button,
     .search-tag {
@@ -144,24 +505,28 @@ main {
     }
 
     /* 季節タグは既存の色を保持  */
-    .tag-button[data-season="春"] {
+    .tag-button[data-season="春"],
+    .search-tag[data-season="春"] {
         background-color: #41ca4d;
-        color: #fafafa;
+        color: #fefefe !important;
     }
 
-    .tag-button[data-season="夏"] {
+    .tag-button[data-season="夏"],
+    .search-tag[data-season="夏"] {
         background-color: #f65f55;
-        color: #fafafa;
+        color: #fefefe !important;
     }
 
-    .tag-button[data-season="秋"] {
+    .tag-button[data-season="秋"],
+    .search-tag[data-season="秋"] {
         background-color: #ef7d30;
-        color: #fafafa;
+        color: #fefefe !important;
     }
 
-    .tag-button[data-season="冬"] {
+    .tag-button[data-season="冬"],
+    .search-tag[data-season="冬"] {
         background-color: #5d8ef2;
-        color: #fafafa;
+        color: #fefefe !important;
     }
 
     /* 選択状態のスタイル */
@@ -222,12 +587,22 @@ main {
     }
 
     .search-container input {
-        min-width: 20px; /* 入力欄の最小幅 */
-        max-width: 40px; /* 入力欄の最大幅 */
+        min-width: 0; /* 最小幅を0に変更 */
+        flex-grow: 1; /* 残りのスペースを占める */
         border: none;
         background: none;
         outline: none;
         font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    /* プレースホルダーが空の時は入力フィールドを隠す */
+    .search-container input[placeholder=""] {
+        width: 0;
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
     }
 
     .close-btn {
@@ -262,9 +637,49 @@ main {
     }
 
     .location-item {
+        width: 100%;
+        height: 200px;
         flex-direction: row-reverse;
         justify-content: space-between;
-        width: 96%;
-        height: 200px;
+        border: none;
+        transition: all 0.3s ease;
+        position: relative;
+        box-sizing: border-box;
+    }
+
+    /* ピン選択時のハイライト効果 - PC版線表示 */
+    .location-item.highlighted {
+        outline: solid 4px #ff4500;
+        outline-offset: -4px;
+        box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease-in-out;
+        animation: pcLineIn 0.5s ease-in-out;
+    }
+
+    /* PC版のフェードアウトアニメーション */
+    .location-item.highlighted.fade-out {
+        animation: pcLineOut 0.5s ease-in-out forwards;
+    }
+
+    @keyframes pcLineIn {
+        0% {
+            outline-color: transparent;
+            box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.08);
+        }
+        100% {
+            outline-color: #ff4500;
+            box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.08);
+        }
+    }
+
+    @keyframes pcLineOut {
+        0% {
+            outline-color: #ff4500;
+            box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.08);
+        }
+        100% {
+            outline-color: transparent;
+            box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.08);
+        }
     }
 }
