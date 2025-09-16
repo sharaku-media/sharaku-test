@@ -30,7 +30,7 @@ body {
 
 .search-icon {
     padding: 4px;
-    background: white;
+    background: var(--bgColor);
     border: 1px solid black;
     border-radius: 100px;
     display: flex;
@@ -98,7 +98,7 @@ main {
     height: 300px;
     position: relative;
     padding: 8px;
-    background: #fefefe;
+    background: var(--bgColor);
     border-radius: 16px;
     display: flex;
     flex-direction: column;
@@ -170,7 +170,7 @@ main {
 
 .location-item-title {
     font-size: 20px;
-    color: #151515;
+    color: var(--fontColor);
 }
 
 .location-item-address {
@@ -188,7 +188,7 @@ main {
     padding-inline: 12px;
     padding-block: 3px;
     background: #212121;
-    color: #fefefe;
+    color: var(--bgColor);
     font-size: 12px;
     border-radius: 4px;
 }
@@ -204,7 +204,7 @@ main {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: white;
+    background: var(--bgColor);
     z-index: 1000;
     transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
@@ -224,13 +224,11 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 16px;
-    border-bottom: 1px solid #e0e0e0;
-    background: white;
+    padding: 26px 16px 0;
+    background: var(--bgColor);
 }
 
-.mobile-search-back,
-.mobile-search-close {
+.mobile-search-back {
     background: none;
     border: none;
     padding: 8px;
@@ -242,18 +240,16 @@ main {
     color: #666;
 }
 
-.mobile-search-back:hover,
-.mobile-search-close:hover {
+.mobile-search-back:hover {
     background: #f5f5f5;
 }
 
 .mobile-search-bar {
-    padding: 16px;
-    background: white;
-    border-bottom: 1px solid #e0e0e0;
+    width: 100%;
 }
 
 .mobile-search-input-container {
+    width: 100%;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -305,40 +301,40 @@ main {
     padding: 4px 8px;
     font-size: 12px;
     text-align: center;
-    color: #fefefe;
+    color: var(--bgColor);
     cursor: pointer;
     border-radius: 4px;
-    background: #373737;
+    background: var(--bgBkgColor);
     transition: all 0.2s;
 }
 
 .mobile-selected-tag[data-season="春"] {
     background: #41ca4d;
-    color: #fefefe;
+    color: var(--bgColor);
     border-color: #41ca4d;
 }
 
 .mobile-selected-tag[data-season="夏"] {
     background: #f65f55;
-    color: #fefefe;
+    color: var(--bgColor);
     border-color: #f65f55;
 }
 
 .mobile-selected-tag[data-season="秋"] {
     background: #ef7d30;
-    color: #fefefe;
+    color: var(--bgColor);
     border-color: #ef7d30;
 }
 
 .mobile-selected-tag[data-season="冬"] {
     background: #5d8ef2;
-    color: #fefefe;
+    color: var(--bgColor);
     border-color: #5d8ef2;
 }
 
 .mobile-tag-section {
     padding: 16px;
-    background: white;
+    background: var(--bgColor);
     border-bottom: 1px solid #e0e0e0;
 }
 
@@ -348,50 +344,10 @@ main {
     gap: 8px;
 }
 
-.mobile-tag-button {
-    background: #373737;
-    color: #fefefe;
-    border: none;
-    padding: 4px 16px;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-/* .mobile-tag-button:hover {
-    background: #e0e0e0;
-} */
-
-.mobile-tag-button.selected {
-    background: rgba(55, 55, 55, 0.8);
-    color: #fefefe;
-}
-
-.mobile-tag-button[data-season="春"] {
-    background: #41ca4d;
-    color: #fefefe;
-}
-
-.mobile-tag-button[data-season="夏"] {
-    background: #f65f55;
-    color: #fefefe;
-}
-
-.mobile-tag-button[data-season="秋"] {
-    background: #ef7d30;
-    color: #fefefe;
-}
-
-.mobile-tag-button[data-season="冬"] {
-    background: #5d8ef2;
-    color: #fefefe;
-}
-
 .mobile-search-results {
     flex: 1;
     overflow-y: auto;
-    background: white;
+    background: var(--bgColor);
     display: block; /* テスト用：常に表示 */
 }
 
@@ -457,8 +413,8 @@ main {
 }
 
 .mobile-result-tag {
-    background: #373737;
-    color: #fefefe;
+    background: var(--bgBkgColor);
+    color: var(--bgColor);
     border: none;
     padding: 4px 12px;
     border-radius: 4px;
@@ -469,22 +425,22 @@ main {
 
 .mobile-result-tag[data-season="春"] {
     background: #41ca4d;
-    color: #fefefe;
+    color: var(--bgColor);
 }
 
 .mobile-result-tag[data-season="夏"] {
     background: #f65f55;
-    color: #fefefe;
+    color: var(--bgColor);
 }
 
 .mobile-result-tag[data-season="秋"] {
     background: #ef7d30;
-    color: #fefefe;
+    color: var(--bgColor);
 }
 
 .mobile-result-tag[data-season="冬"] {
     background: #5d8ef2;
-    color: #fefefe;
+    color: var(--bgColor);
 }
 
 @media screen and (min-width: 600px) {
@@ -498,36 +454,8 @@ main {
     }
 
     /* PC版のタグスタイル */
-    .tag-button,
-    .search-tag {
-        background-color: #f5f5f5; /* 背景色を明るいグレーに */
-        color: #373737; /* テキストを暗めに */
-    }
 
     /* 季節タグは既存の色を保持  */
-    .tag-button[data-season="春"],
-    .search-tag[data-season="春"] {
-        background-color: #41ca4d;
-        color: #fefefe !important;
-    }
-
-    .tag-button[data-season="夏"],
-    .search-tag[data-season="夏"] {
-        background-color: #f65f55;
-        color: #fefefe !important;
-    }
-
-    .tag-button[data-season="秋"],
-    .search-tag[data-season="秋"] {
-        background-color: #ef7d30;
-        color: #fefefe !important;
-    }
-
-    .tag-button[data-season="冬"],
-    .search-tag[data-season="冬"] {
-        background-color: #5d8ef2;
-        color: #fefefe !important;
-    }
 
     /* 選択状態のスタイル */
     .tag-button.selected::before {
