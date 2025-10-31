@@ -1,0 +1,203 @@
+body {
+    overflow: scroll;
+}
+
+.archive-header {
+    width: 100%;
+    height: 20svh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .post-search-bar {
+        width: 500px;
+        height: 40px;
+
+        .post-search {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 16px;
+            box-sizing: border-box;
+            border: var(--borderColor) 1px solid;
+            border-radius: 10px;
+            background-color: var(--bgColor);
+        }
+    }
+}
+
+.back-to-top {
+    display: block;
+    position: fixed;
+    top: 60px;
+    left: 60px;
+    z-index: 100;
+}
+
+.back-button {
+    display: inline-flex; /* PCでは表示 */
+    align-items: center;
+    gap: 16px;
+    padding: 16px 32px;
+    background: var(--bgBkgColor);
+    color: var(--bgColor);
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 3px 3px 6px rgba(21, 21, 21, 0.25);
+    transition: all 0.3s ease-in-out;
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.back-button:hover {
+    scale: 1.05;
+}
+
+/* 記事 */
+.article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 48px 24px;
+    padding: 24px;
+    box-sizing: border-box;
+    max-width: 1200px;
+    margin: auto;
+
+    .article-card {
+        width: 240px;
+        height: 300px;
+        border-radius: 10px;
+        padding: 10px;
+        background: #fafafa;
+        box-shadow: 0 0 14px 2px rgba(15, 15, 15, 0.15);
+
+        img {
+            width: 220px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 0 auto;
+        }
+
+        .article-title {
+            font-size: 16px;
+            font-weight: bold;
+            padding-top: 10px;
+            line-height: 1.2;
+        }
+
+        .mobile-intro-excerpt {
+            display: none;
+        }
+
+        .article-meta {
+            font-size: 12px;
+            color: #ccc;
+            padding-top: 15px;
+        }
+    }
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 767px) {
+    .mobile-header {
+        .search-icon,
+        .header-course-btn-mobile {
+            display: none !important;
+        }
+    }
+
+    .archive-header {
+        height: 10svh;
+
+        .post-search-bar {
+            width: 90%;
+            margin: auto;
+        }
+    }
+
+    .article-grid {
+        justify-items: center;
+        align-items: center;
+        gap: 24px;
+        padding: 16px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .pc-header {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 555px) {
+    .article-grid {
+        .article-card {
+            width: 400px;
+            height: 180px;
+            .article-box {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: row-reverse;
+                align-items: center;
+
+                img {
+                    height: 160px;
+                }
+
+                .article-content {
+                    width: 80%;
+                    height: 100%;
+                    margin: auto;
+                    padding-right: 4px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: flex-start;
+
+                    .article-title {
+                        line-height: 1.4;
+                        font-size: 18px;
+                        padding-top: 0px;
+                    }
+
+                    .mobile-intro-excerpt {
+                        display: block;
+                        width: 100%;
+                        height: 80%;
+                        padding-top: 6px;
+
+                        .line-clamp {
+                            width: 220px;
+                            word-break: break-all;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 2;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            font-size: 12px;
+                            color: #999;
+                        }
+                    }
+
+                    .article-meta {
+                        padding-top: 0px;
+                    }
+                }
+            }
+        }
+    }
+}
