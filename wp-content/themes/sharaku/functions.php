@@ -16,48 +16,80 @@ function sharaku_enqueue_assets() {
     );
 
     // 共通のJavaScriptを読み込む（全ページ共通）
-  wp_enqueue_script(
-    'sharaku-common-script',
-    get_template_directory_uri() . '/scripts/common.js',
-    [],
-    null,
-    true
-  );
+    wp_enqueue_script(
+        'sharaku-common-script',
+        get_template_directory_uri() . '/scripts/common.js',
+        [],
+        null,
+        true
+    );
 
   // モバイル検索のスクリプトを全ページで読み込む
-  wp_enqueue_script(
-      'sharaku-mobile-search-script',
-      get_template_directory_uri() . '/scripts/mobile-search.js',
-      ['sharaku-common-script'], // common.jsに依存
-      null,
-      true
-  );
+    wp_enqueue_script(
+        'sharaku-mobile-search-script',
+        get_template_directory_uri() . '/scripts/mobile-search.js',
+        ['sharaku-common-script'], // common.jsに依存
+        null,
+        true
+    );
 
   // 投稿詳細ページ用のアセット
-  if (is_singular('post')) {
+    if (is_singular('post')) {
     wp_enqueue_style(
-      'sharaku-single-post-style',
-      get_template_directory_uri() . '/styles/single-post.css'
+        'sharaku-single-post-style',
+        get_template_directory_uri() . '/styles/single-post.css'
     );
 
     wp_enqueue_script(
-      'sharaku-slider-script',
-      get_template_directory_uri() . '/scripts/slider.js',
-      [],
-      null,
-      true
+        'sharaku-slider-script',
+        get_template_directory_uri() . '/scripts/slider.js',
+        [],
+        null,
+        true
     );
 
     wp_enqueue_script(
-      'sharaku-image-modal-script',
-      get_template_directory_uri() . '/scripts/image-modal.js',
-      [],
-      null,
-      true
-    );
-  }
+        'sharaku-image-modal-script',
+        get_template_directory_uri() . '/scripts/image-modal.js',
+        [],
+        null,
+        true
+        );
+    }
 
-  if (is_front_page() || is_home()) {
+  // ✅ 記事一覧（archive-article.php 用）
+    if (is_post_type_archive('article')) {
+        wp_enqueue_style(
+            'sharaku-archive-article-style',
+            get_template_directory_uri() . '/styles/archive-article.css'
+        );
+        // ★ 新規追加：記事検索用スクリプト
+        wp_enqueue_script(
+            'sharaku-article-search-script',
+            get_template_directory_uri() . '/scripts/article-search.js',
+            [],
+            null,
+            true
+        );
+    }
+
+  // ✅ 記事詳細（single-article.php 用）
+    if (is_singular('article')) {
+        // archive-article.cssを先に読み込む（依存関係として）
+        wp_enqueue_style(
+            'sharaku-archive-article-style-for-single',
+            get_template_directory_uri() . '/styles/archive-article.css'
+        );
+        
+        // single-article.cssを読み込む（archive-article.cssに依存）
+        wp_enqueue_style(
+            'sharaku-single-article-style',
+            get_template_directory_uri() . '/styles/single-article.css',
+            // array('sharaku-archive-article-style-for-single') // 依存関係を指定
+        );
+    }
+
+    if (is_front_page() || is_home()) {
     // index.cssは既に上で読み込み済みなので、ここでは読み込まない
 
     // index.jsを読み込む（モバイル検索は既に全ページで読み込み済み）
@@ -84,6 +116,126 @@ add_action('wp_enqueue_scripts', 'sharaku_enqueue_assets');
 // WordPressのネイティブLazy Loadを有効化
 add_filter('wp_lazy_loading_enabled', '__return_true');
 
+function create_article_post_type() {
+    // アイキャッチ画像を有効化
+    add_theme_support('post-thumbnails');
+    register_post_type('article',
+    array(
+        'labels' => array(
+            'name'          => '記事',
+            'singular_name' => '記事',
+            'featured_image'        => 'アイキャッチ画像',
+            'set_featured_image'    => 'アイキャッチ画像を設定',
+            'remove_featured_image' => 'アイキャッチ画像を削除',
+            'use_featured_image'    => 'アイキャッチ画像として使用'
+        ),
+        'public'       => true,
+        'has_archive'  => true,
+        'menu_position'=> 5,
+        'show_in_rest' => true,
+        'rewrite'      => array('slug' => 'article'),
+        'supports'     => array('title', 'editor', 'thumbnail', 'excerpt', 'author', 'revisions')
+        )
+    );
+}
+add_action('init', 'create_article_post_type');
+
+// 記事(article)のブロックエディタ初期構成
+add_action('init', function () {
+    $post_type = get_post_type_object('article');
+    if ($post_type) {
+        $post_type->template = [
+            // 1. はじめに
+            ['core/group', [
+                'className' => 'block-section intro-section'
+            ], [
+                ['core/heading', [
+                    'level' => 3,
+                    'content' => 'はじめに', // ←編集可能
+                    'className' => 'fixed-heading'
+                ]],
+                ['core/paragraph', [
+                    'placeholder' => '記事の導入文を入力してください',
+                    'className' => 'paragraph-intro'
+                ]]
+            ]],
+
+            // 3. 使用機材
+            ['core/group', [
+                'className' => 'block-section tools-section'
+            ], [
+                ['core/heading', [
+                    'level' => 3,
+                    'content' => '使用した機材・アプリ', // ←編集可能
+                    'className' => 'fixed-heading'
+                ]],
+                ['core/list', [
+                    'placeholder' => '使用機材を箇条書きで入力'
+                ]]
+            ]],
+
+            // 4. ステップ解説セクション
+            ['core/group', ['className' => 'block-section steps-wrapper'], [
+                ['core/heading', [
+                    'level' => 3,
+                    'content' => 'ステップ解説',
+                    'className' => 'fixed-heading'
+                ]],
+
+                // ステップ1
+                ['core/group', ['className' => 'block-section step-section'], [
+                    ['core/heading', [
+                        'level' => 3,
+                        'content' => 'STEP1：タイトルを入力', // ←初期値、自由に編集可能
+                    ]],
+                    ['core/image', [
+                        'className' => 'step-image',
+                        'align' => 'center'
+                    ]],
+                    ['core/paragraph', ['placeholder' => 'ここに解説を入力']]
+                ]],
+
+                // ステップ2
+                ['core/group', ['className' => 'block-section step-section'], [
+                    ['core/heading', [
+                        'level' => 3,
+                        'content' => 'STEP2：タイトルを入力',
+                    ]],
+                    ['core/image', [
+                        'className' => 'step-image',
+                        'align' => 'center'
+                    ]],
+                    ['core/paragraph', ['placeholder' => 'ここに解説を入力']]
+                ]],
+
+                // ステップ3
+                ['core/group', ['className' => 'block-section step-section'], [
+                    ['core/heading', [
+                        'level' => 3,
+                        'content' => 'STEP3：タイトルを入力',
+                    ]],
+                    ['core/image', [
+                        'className' => 'step-image',
+                        'align' => 'center'
+                    ]],
+                    ['core/paragraph', ['placeholder' => 'ここに解説を入力']]
+                ]]
+            ]],
+
+            // 5. ワンポイントアドバイス
+            ['core/group', ['className' => 'block-section advice-section'], [
+                ['core/heading', ['level' => 3, 'content' => 'ワンポイントアドバイス']],
+                ['core/paragraph', ['placeholder' => 'ちょっとした補足やプロのコツを書いてください']]
+            ]],
+        ];
+
+        // テンプレートロックを解除して自由に編集可能にする
+        $post_type->template_lock = null;
+    }
+});
+
+
+
 // functions.php に追加
 function noindex_author_archive() {
   if (is_author()) {
@@ -100,6 +252,44 @@ function disable_author_archive() {
   }
 }
 add_action('init', 'disable_author_archive');
+
+/**
+ * デバイス別のアーカイブ表示件数を設定
+ * モバイル: 3件、PC: 10件
+ */
+// PC/スマホで記事アーカイブの表示件数を出し分け
+function sharaku_set_archive_posts_per_page( $query ) {
+    // 管理画面/メイン以外は除外
+    if ( is_admin() || ! $query->is_main_query() ) {
+        return;
+    }
+
+    if ( $query->is_post_type_archive( 'article' ) ) {
+        // デフォルトはPC件数
+        $ppp = 10;
+
+        // 1) URLパラメータがあれば最優先 (例: /article/?pp=2)
+        if ( isset($_GET['pp']) && is_numeric($_GET['pp']) ) {
+            $ppp = max(1, intval($_GET['pp']));
+        }
+        // 2) 画面幅でフロントJSがセットしたクッキーを優先
+        elseif ( isset($_COOKIE['sp_view']) && $_COOKIE['sp_view'] === '1' ) {
+            $ppp = 6; // スマホ
+        }
+        // 3) 最後に UA 判定 (iPad等は false になるので過信しない)
+        elseif ( function_exists('wp_is_mobile') && wp_is_mobile() ) {
+            $ppp = 6;
+        }
+
+        $query->set( 'posts_per_page', $ppp );
+
+        // 念のため（ページネーション保険）
+        if ( get_query_var('paged') ) {
+            $query->set( 'paged', get_query_var('paged') );
+        }
+    }
+}
+add_action( 'pre_get_posts', 'sharaku_set_archive_posts_per_page', 99 ); // 後段で上書きされないよう優先度を上げる
 
 
 // すべての画像にloading="lazy"属性を追加
