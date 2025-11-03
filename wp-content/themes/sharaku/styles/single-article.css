@@ -78,7 +78,6 @@ body {
         .intro-section {
             position: relative;
             width: 100%;
-            height: 150px;
             margin: 50px auto;
             padding: 20px 30px;
             border-radius: 10px;
@@ -174,6 +173,19 @@ body {
                 justify-content: center;
                 align-items: center;
 
+                .is-layout-flow {
+                    width: 60%;
+                    margin: 0 auto 40px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+
+                    .is-layout-flex {
+                        margin-top: 20px;
+                    }
+                }
+
                 h3 {
                     display: inline-block;
                     min-width: 500px;
@@ -185,14 +197,14 @@ body {
                     border-radius: 5px;
                 }
                 p {
-                    margin: 20px 0 20px 20px;
+                    margin: 20px;
                 }
 
                 .aligncenter,
                 .size-large,
                 .is-resized {
                     width: 200px;
-                    height: 300px;
+                    height: 100%;
                     margin-top: 10px;
                     overflow: hidden;
                     border-radius: 5px;
@@ -209,7 +221,6 @@ body {
         .advice-section {
             position: relative;
             width: 100%;
-            height: 150px;
             margin: 50px 0;
             padding: 20px 30px;
             border: solid 1px var(--accentColor);
@@ -318,6 +329,28 @@ body {
                 .step-section {
                     h3 {
                         min-width: 400px;
+                    }
+                    .is-layout-flow {
+                        width: 100%;
+                    }
+
+                    .is-layout-flex {
+                        flex-direction: column;
+                    }
+
+                    /* スマホ版でpタグを100%幅にする */
+                    p {
+                        width: 100%;
+                    }
+
+                    /* pタグとimgタグが両方存在する場合、縦並びにする */
+                    &:has(img):has(p) {
+                        display: block;
+                    }
+
+                    /* 画像がある場合でもpタグは100%幅を維持 */
+                    &:has(img) p {
+                        width: 100%;
                     }
                 }
             }

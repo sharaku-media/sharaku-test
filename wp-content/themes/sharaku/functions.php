@@ -241,6 +241,12 @@ add_action('init', function () {
                 ['core/heading', ['level' => 3, 'content' => 'ワンポイントアドバイス']],
                 ['core/paragraph', ['placeholder' => 'ちょっとした補足やプロのコツを書いてください']]
             ]],
+
+            // 6. 自由記述エリア（見出しやコンテンツを自由に追加可能）
+            ['core/group', ['className' => 'block-section free-content-section'], [
+                ['core/heading', ['level' => 3, 'content' => '追加コンテンツ', 'placeholder' => '見出しを編集できます']],
+                ['core/paragraph', ['placeholder' => 'ここに自由にコンテンツを追加できます。見出しブロックも追加できます。']]
+            ]],
         ];
 
         // テンプレートロックを解除して自由に編集可能にする
