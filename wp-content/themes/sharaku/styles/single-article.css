@@ -121,6 +121,11 @@ body {
                         margin-top: 2px;
                         color: var(--fontColor);
                     }
+
+                    &:hover {
+                        text-decoration: underline;
+                        transition: all 0.3s ease-in-out;
+                    }
                 }
             }
         }
@@ -143,7 +148,7 @@ body {
                 padding-left: 20px;
                 li {
                     position: relative;
-                    font-size: 14px;
+                    font-size: 16px;
                     margin-left: 10px;
                     padding-left: 10px;
 
@@ -174,7 +179,7 @@ body {
                 align-items: center;
 
                 .is-layout-flow {
-                    width: 60%;
+                    width: 100%;
                     margin: 0 auto 40px;
                     display: flex;
                     flex-direction: column;
@@ -188,7 +193,7 @@ body {
 
                 h3 {
                     display: inline-block;
-                    min-width: 500px;
+                    min-width: 800px;
                     height: var(--stepHeight);
                     line-height: var(--stepHeight);
                     font-size: 16px;
@@ -197,14 +202,16 @@ body {
                     border-radius: 5px;
                 }
                 p {
-                    margin: 20px;
+                    width: 80%;
+                    font-size: 16px;
+                    padding: 20px;
                 }
 
                 .aligncenter,
                 .size-large,
                 .is-resized {
-                    width: 200px;
-                    height: 100%;
+                    width: 500px;
+                    height: auto;
                     margin-top: 10px;
                     overflow: hidden;
                     border-radius: 5px;
@@ -253,16 +260,12 @@ body {
             gap: 24px;
 
             .article-card {
-                /* width: 300px;
-                height: 320px; */
-                /* max-width: 300px; */
                 border-radius: 10px;
                 padding: 10px;
                 background: #fafafa;
                 box-shadow: 0 0 14px 2px rgba(15, 15, 15, 0.15);
 
                 .article-box {
-                    /* display: block; */
                     text-decoration: none;
                     color: inherit;
                 }
@@ -338,6 +341,21 @@ body {
                         flex-direction: column;
                     }
 
+                    /* スマホ版での画像サイズ調整 */
+                    .aligncenter,
+                    .size-large,
+                    .is-resized {
+                        width: 100%;
+                        height: auto;
+                        margin: 10px auto;
+
+                        img {
+                            width: 100%;
+                            height: auto;
+                            object-fit: contain;
+                        }
+                    }
+
                     /* スマホ版でpタグを100%幅にする */
                     p {
                         width: 100%;
@@ -351,6 +369,22 @@ body {
                     /* 画像がある場合でもpタグは100%幅を維持 */
                     &:has(img) p {
                         width: 100%;
+                    }
+
+                    /* スマホ版での画像サイズ調整 */
+                    .aligncenter,
+                    .size-large,
+                    .is-resized {
+                        width: 100%;
+                        max-width: 350px;
+                        height: auto;
+                        margin: 10px auto;
+
+                        img {
+                            width: 100%;
+                            height: auto;
+                            object-fit: contain;
+                        }
                     }
                 }
             }

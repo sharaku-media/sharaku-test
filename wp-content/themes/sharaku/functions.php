@@ -233,6 +233,32 @@ add_action('init', function () {
                         'align' => 'center'
                     ]],
                     ['core/paragraph', ['placeholder' => 'ここに解説を入力']]
+                ]],
+
+                // ステップ4
+                ['core/group', ['className' => 'block-section step-section'], [
+                    ['core/heading', [
+                        'level' => 3,
+                        'content' => 'STEP4：タイトルを入力',
+                    ]],
+                    ['core/image', [
+                        'className' => 'step-image',
+                        'align' => 'center'
+                    ]],
+                    ['core/paragraph', ['placeholder' => 'ここに解説を入力']]
+                ]],
+
+                // ステップ5
+                ['core/group', ['className' => 'block-section step-section'], [
+                    ['core/heading', [
+                        'level' => 3,
+                        'content' => 'STEP5：タイトルを入力',
+                    ]],
+                    ['core/image', [
+                        'className' => 'step-image',
+                        'align' => 'center'
+                    ]],
+                    ['core/paragraph', ['placeholder' => 'ここに解説を入力']]
                 ]]
             ]],
 
